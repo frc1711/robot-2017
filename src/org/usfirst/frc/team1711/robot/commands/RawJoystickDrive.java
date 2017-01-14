@@ -25,7 +25,8 @@ public class RawJoystickDrive extends Command
 		//these are the values from 2015, we should be using the same physical joystick
 		if(RobotMap.driverController.getMagnitude() > .08 || Math.abs(RobotMap.driverController.getRawAxis(4)) > .08)
 		{
-			Robot.driveSystem.polarDrive(RobotMap.driverController.getMagnitude(), RobotMap.driverController.getDirectionDegrees(), RobotMap.driverController.getRawAxis(4));
+			Robot.driveSystem.polarDrive(RobotMap.driverController.getRawAxis(1), RobotMap.driverController.getDirectionDegrees(), RobotMap.driverController.getRawAxis(4));
+		//	Robot.driveSystem.cartesianDrive(RobotMap.driverController.getRawAxis(0), -(RobotMap.driverController.getRawAxis(1)), rotation, gyroAngle);
 		}
 	}
 
