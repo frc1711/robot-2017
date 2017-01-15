@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import org.usfirst.frc.team1711.robot.commands.DriveJoystickTest;
 import org.usfirst.frc.team1711.robot.commands.RawJoystickDrive;
 import org.usfirst.frc.team1711.robot.subsystems.DriveSystem;
 
@@ -34,7 +35,8 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {
 		RobotMap.init(); //this line needs to be first
 		driveSystem = new DriveSystem();
-		teleopDrive = new RawJoystickDrive();
+//		teleopDrive = new RawJoystickDrive();
+		teleopDrive = new DriveJoystickTest();
 		oi = new OI();
 		chooser.addDefault("Default Auto", new RawJoystickDrive());
 		// chooser.addObject("My Auto", new MyAutoCommand());
