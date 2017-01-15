@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team1711.robot.commands.DriveJoystickTest;
 import org.usfirst.frc.team1711.robot.commands.RawJoystickDrive;
+import org.usfirst.frc.team1711.robot.commands.TestCommands;
 import org.usfirst.frc.team1711.robot.subsystems.DriveSystem;
 
 /**
@@ -25,6 +26,7 @@ public class Robot extends IterativeRobot {
 
 	Command autonomousCommand;
 	Command teleopDrive;
+	Command testingGroup;
 	SendableChooser<Command> chooser = new SendableChooser<>();
 
 	/**
@@ -35,8 +37,8 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {
 		RobotMap.init(); //this line needs to be first
 		driveSystem = new DriveSystem();
-//		teleopDrive = new RawJoystickDrive();
-		teleopDrive = new DriveJoystickTest();
+		teleopDrive = new RawJoystickDrive();
+		testingGroup = new TestCommands();
 		oi = new OI();
 		chooser.addDefault("Default Auto", new RawJoystickDrive());
 		// chooser.addObject("My Auto", new MyAutoCommand());
@@ -51,6 +53,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void disabledInit() {
 		teleopDrive.cancel();
+		testingGroup.cancel();
 	}
 
 	@Override
@@ -118,6 +121,8 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void testPeriodic() {
+		//this is basically our debugger
 		LiveWindow.run();
+		testingGroup.start();
 	}
 }
