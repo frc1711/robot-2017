@@ -38,7 +38,7 @@ public class Robot extends IterativeRobot {
 		RobotMap.init(); //this line needs to be first
 		driveSystem = new DriveSystem();
 		teleopDrive = new RawJoystickDrive();
-		testingGroup = new TestCommands();
+		testingGroup = new DriveJoystickTest();
 		oi = new OI();
 		chooser.addDefault("Default Auto", new RawJoystickDrive());
 		// chooser.addObject("My Auto", new MyAutoCommand());
@@ -124,5 +124,8 @@ public class Robot extends IterativeRobot {
 		//this is basically our debugger
 		LiveWindow.run();
 		testingGroup.start();
+		System.out.println("Drive stick magnitude: " + RobotMap.driverController.getMagnitude());
+		System.out.println("Drive direction in degrees: " + RobotMap.driverController.getDirectionDegrees());
+		System.out.println();
 	}
 }
