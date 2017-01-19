@@ -113,6 +113,10 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+		System.out.println("Front left: " + RobotMap.frontLeftDriveCANTalon.get());
+		System.out.println("Front right: " + RobotMap.frontRightDriveCANTalon.get());
+		System.out.println("Rear left: " + RobotMap.rearLeftDriveCANTalon.get());
+		System.out.println("Rear right: " + RobotMap.frontLeftDriveCANTalon.get());
 		
 	}
 
@@ -126,6 +130,6 @@ public class Robot extends IterativeRobot {
 		testingGroup.start();
 		System.out.println("Drive stick magnitude: " + RobotMap.driverController.getMagnitude());
 		System.out.println("Drive direction in degrees: " + RobotMap.driverController.getDirectionDegrees());
-		System.out.println();
+	
 	}
 }
