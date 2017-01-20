@@ -11,6 +11,7 @@ import org.usfirst.frc.team1711.robot.commands.DriveJoystickTest;
 import org.usfirst.frc.team1711.robot.commands.RawJoystickDrive;
 import org.usfirst.frc.team1711.robot.commands.TestCommands;
 import org.usfirst.frc.team1711.robot.subsystems.DriveSystem;
+import org.usfirst.frc.team1711.robot.vision.VisionServer;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -22,6 +23,7 @@ import org.usfirst.frc.team1711.robot.subsystems.DriveSystem;
 public class Robot extends IterativeRobot {
 
 	public static DriveSystem driveSystem;
+	public static VisionServer vision;
 	public static OI oi;
 
 	Command autonomousCommand;
@@ -105,6 +107,8 @@ public class Robot extends IterativeRobot {
 		if (autonomousCommand != null)
 			autonomousCommand.cancel();
 		teleopDrive.start();
+
+		vision = new VisionServer();
 	}
 
 	/**
@@ -113,10 +117,11 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-		System.out.println("Front left: " + RobotMap.frontLeftDriveCANTalon.get());
-		System.out.println("Front right: " + RobotMap.frontRightDriveCANTalon.get());
-		System.out.println("Rear left: " + RobotMap.rearLeftDriveCANTalon.get());
-		System.out.println("Rear right: " + RobotMap.frontLeftDriveCANTalon.get());
+//		System.out.println("Front left: " + RobotMap.frontLeftDriveCANTalon.get());
+//		System.out.println("Front right: " + RobotMap.frontRightDriveCANTalon.get());
+//		System.out.println("Rear left: " + RobotMap.rearLeftDriveCANTalon.get());
+//		System.out.println("Rear right: " + RobotMap.frontLeftDriveCANTalon.get());
+
 		
 	}
 

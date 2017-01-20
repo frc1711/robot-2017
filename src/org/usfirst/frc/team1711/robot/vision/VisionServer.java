@@ -10,8 +10,9 @@ public class VisionServer
 	
 	public VisionServer()
 	{
-		processorCam = new UsbCamera("processorCam", 1);
+		processorCam = new UsbCamera("processorCam", 0);
 		server.getInstance().startAutomaticCapture(processorCam);
+		System.out.println("hello world!!");
 	}
 	
 	public void visionFeed()
