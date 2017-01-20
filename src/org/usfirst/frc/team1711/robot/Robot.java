@@ -1,5 +1,9 @@
 package org.usfirst.frc.team1711.robot;
 
+import edu.wpi.cscore.CvSink;
+import edu.wpi.cscore.CvSource;
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -7,6 +11,8 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import org.opencv.core.Mat;
+import org.opencv.imgproc.Imgproc;
 import org.usfirst.frc.team1711.robot.commands.DriveJoystickTest;
 import org.usfirst.frc.team1711.robot.commands.RawJoystickDrive;
 import org.usfirst.frc.team1711.robot.commands.TestCommands;
@@ -42,6 +48,7 @@ public class Robot extends IterativeRobot {
 		teleopDrive = new RawJoystickDrive();
 		testingGroup = new DriveJoystickTest();
 		oi = new OI();
+		vision = new VisionServer();
 		chooser.addDefault("Default Auto", new RawJoystickDrive());
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", chooser);
@@ -107,8 +114,6 @@ public class Robot extends IterativeRobot {
 		if (autonomousCommand != null)
 			autonomousCommand.cancel();
 		teleopDrive.start();
-
-		vision = new VisionServer();
 	}
 
 	/**
@@ -121,8 +126,13 @@ public class Robot extends IterativeRobot {
 //		System.out.println("Front right: " + RobotMap.frontRightDriveCANTalon.get());
 //		System.out.println("Rear left: " + RobotMap.rearLeftDriveCANTalon.get());
 //		System.out.println("Rear right: " + RobotMap.frontLeftDriveCANTalon.get());
-
-		
+		Thread visionThread = new Thread(){
+			public void run()
+			{
+				vision.visionFeed();
+			}
+		};
+		visionThread.start();
 	}
 
 	/**
