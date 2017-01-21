@@ -34,13 +34,9 @@ public class Robot extends IterativeRobot {
 
 	public static DriveSystem driveSystem;
 	public static VisionServer vision;
-	public static OI oi;
-<<<<<<< HEAD
-	
+	public static OI oi;	
 	VisionThread visionThread;
-=======
 	public static Agitator agitator;
->>>>>>> branch 'master' of https://github.com/frc1711/robot-2017.git
 
 	Command autonomousCommand;
 	Command teleopDrive;
