@@ -127,7 +127,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
-		spinAgitator.execute();
+		spinAgitator.start();
 		Scheduler.getInstance().run();
 //		System.out.println("Front left: " + RobotMap.frontLeftDriveCANTalon.get());
 //		System.out.println("Front right: " + RobotMap.frontRightDriveCANTalon.get());
