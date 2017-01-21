@@ -15,7 +15,9 @@ import org.opencv.core.Mat;
 import org.opencv.imgproc.Imgproc;
 import org.usfirst.frc.team1711.robot.commands.DriveJoystickTest;
 import org.usfirst.frc.team1711.robot.commands.RawJoystickDrive;
+import org.usfirst.frc.team1711.robot.commands.SpinAgitator;
 import org.usfirst.frc.team1711.robot.commands.TestCommands;
+import org.usfirst.frc.team1711.robot.subsystems.Agitator;
 import org.usfirst.frc.team1711.robot.subsystems.DriveSystem;
 import org.usfirst.frc.team1711.robot.vision.VisionServer;
 
@@ -31,10 +33,12 @@ public class Robot extends IterativeRobot {
 	public static DriveSystem driveSystem;
 	public static VisionServer vision;
 	public static OI oi;
+	public static Agitator agitator;
 
 	Command autonomousCommand;
 	Command teleopDrive;
 	Command testingGroup;
+	Command spinAgitator;
 	SendableChooser<Command> chooser = new SendableChooser<>();
 
 	/**
@@ -47,6 +51,8 @@ public class Robot extends IterativeRobot {
 		driveSystem = new DriveSystem();
 		teleopDrive = new RawJoystickDrive();
 		testingGroup = new DriveJoystickTest();
+		agitator = new Agitator();
+		spinAgitator = new SpinAgitator();
 		oi = new OI();
 		vision = new VisionServer();
 		chooser.addDefault("Default Auto", new RawJoystickDrive());
@@ -121,6 +127,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
+		spinAgitator.execute();
 		Scheduler.getInstance().run();
 //		System.out.println("Front left: " + RobotMap.frontLeftDriveCANTalon.get());
 //		System.out.println("Front right: " + RobotMap.frontRightDriveCANTalon.get());
