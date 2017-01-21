@@ -7,6 +7,9 @@ import edu.wpi.cscore.CvSink;
 import edu.wpi.cscore.CvSource;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.first.wpilibj.networktables.NetworkTable;
+import edu.wpi.first.wpilibj.vision.VisionRunner;
+import edu.wpi.first.wpilibj.vision.VisionThread;
 
 public class VisionServer
 {
@@ -15,6 +18,9 @@ public class VisionServer
 	CvSource outputStream;
 	Mat source;
 	Mat output;
+	VisionThread visionThread;
+	GripPipeline pipeline;
+	NetworkTable table;
 	
 	public VisionServer()
 	{
@@ -25,6 +31,16 @@ public class VisionServer
 		480);
 		source = new Mat();
 		output = new Mat();
+		visionThread = new VisionThread(camera, pipeline,new VisionRunner.Listener<GripPipeline>() {
+
+			@Override
+			public void copyPipelineOutputs(GripPipeline pipeline) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		visionThread.start();
+		table = NetworkTable.getTable("GRIP/myContoursReport");
 	}
 	
 	public void visionFeed()
@@ -32,5 +48,10 @@ public class VisionServer
 		cvSink.grabFrame(source);
 		Imgproc.cvtColor(source, output, Imgproc.COLOR_BGR2GRAY);
 		outputStream.putFrame(output);
+	}
+	
+	public void processVision()
+	{
+		
 	}
 }

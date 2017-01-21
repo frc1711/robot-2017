@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.vision.VisionThread;
 
 import org.opencv.core.Mat;
 import org.opencv.imgproc.Imgproc;
@@ -19,6 +20,7 @@ import org.usfirst.frc.team1711.robot.commands.SpinAgitator;
 import org.usfirst.frc.team1711.robot.commands.TestCommands;
 import org.usfirst.frc.team1711.robot.subsystems.Agitator;
 import org.usfirst.frc.team1711.robot.subsystems.DriveSystem;
+import org.usfirst.frc.team1711.robot.vision.GripPipeline;
 import org.usfirst.frc.team1711.robot.vision.VisionServer;
 
 /**
@@ -33,7 +35,12 @@ public class Robot extends IterativeRobot {
 	public static DriveSystem driveSystem;
 	public static VisionServer vision;
 	public static OI oi;
+<<<<<<< HEAD
+	
+	VisionThread visionThread;
+=======
 	public static Agitator agitator;
+>>>>>>> branch 'master' of https://github.com/frc1711/robot-2017.git
 
 	Command autonomousCommand;
 	Command teleopDrive;
@@ -58,6 +65,7 @@ public class Robot extends IterativeRobot {
 		chooser.addDefault("Default Auto", new RawJoystickDrive());
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", chooser);
+	    
 	}
 
 	/**
@@ -139,7 +147,7 @@ public class Robot extends IterativeRobot {
 				vision.visionFeed();
 			}
 		};
-		visionThread.start();
+		visionThread.start(); 
 	}
 
 	/**
@@ -149,9 +157,9 @@ public class Robot extends IterativeRobot {
 	public void testPeriodic() {
 		//this is basically our debugger
 		LiveWindow.run();
-		testingGroup.start();
-		System.out.println("Drive stick magnitude: " + RobotMap.driverController.getMagnitude());
-		System.out.println("Drive direction in degrees: " + RobotMap.driverController.getDirectionDegrees());
-	
+//		testingGroup.start();
+//		System.out.println("Drive stick magnitude: " + RobotMap.driverController.getMagnitude());
+//		System.out.println("Drive direction in degrees: " + RobotMap.driverController.getDirectionDegrees());
+
 	}
 }
