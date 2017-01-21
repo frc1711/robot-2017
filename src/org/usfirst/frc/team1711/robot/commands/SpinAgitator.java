@@ -16,7 +16,7 @@ public class SpinAgitator extends Command
 	{
 	}
 	
-	public void execute()
+	protected void execute()
 	{
 			//.5 is arbitrary testing will reveal the proper value 
 			Robot.agitator.agitate(.5);
@@ -27,7 +27,7 @@ public class SpinAgitator extends Command
 		return false;
 	}
 	
-	public void end()
+	protected void end()
 	{
 		Robot.agitator.agitate(0);
 	}
