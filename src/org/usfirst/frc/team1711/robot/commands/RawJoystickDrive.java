@@ -23,9 +23,9 @@ public class RawJoystickDrive extends Command
 	{
 		//I don't know the size of the dead zone or the correct axis for rotation
 		//these are the values from 2015, we should be using the same physical joystick
-		if(RobotMap.driverController.getMagnitude() > .25 || Math.abs(RobotMap.driverController.getRawAxis(4)) > .25)
+		if(RobotMap.driverController.getMagnitude() > .1)
 		{
-			Robot.driveSystem.polarDrive(RobotMap.driverController.getMagnitude(), RobotMap.driverController.getDirectionDegrees(), RobotMap.driverController.getRawAxis(4));
+			Robot.driveSystem.arcadeDrive(RobotMap.driverController);
 		//	Robot.driveSystem.cartesianDrive(RobotMap.driverController.getRawAxis(0), -(RobotMap.driverController.getRawAxis(1)), rotation, gyroAngle);
 		}
 	}
@@ -38,7 +38,7 @@ public class RawJoystickDrive extends Command
 	
 	protected void end()
 	{
-		Robot.driveSystem.polarDrive(0, 0, 0);
+		Robot.driveSystem.stopMotors();
 	}
 	
 }

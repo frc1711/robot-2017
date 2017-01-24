@@ -5,16 +5,15 @@ import org.usfirst.frc.team1711.robot.RobotMap;
 import com.ctre.CANTalon;
 
 import edu.wpi.first.wpilibj.AnalogGyro;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class DriveSystem extends Subsystem
 {
 	//Motor controllers
-	CANTalon frontRightDrive;
-	CANTalon frontLeftDrive;
-	CANTalon rearRightDrive;
-	CANTalon rearLeftDrive;
+	CANTalon rightDrive;
+	CANTalon leftDrive;
 	
 	RobotDrive drive;
 	
@@ -31,33 +30,26 @@ public class DriveSystem extends Subsystem
 	//	rearRightDrive = RobotMap.rearRightDriveCANTalon;
 	//	rearLeftDrive = RobotMap.rearLeftDriveCANTalon;
 		
-		frontRightDrive = new CANTalon(1);
-		frontLeftDrive = new CANTalon(0);
+		rightDrive = new CANTalon(1);
+		leftDrive = new CANTalon(0);
 		
-		frontLeftDrive.reverseOutput(true);
-		rearRightDrive.reverseOutput(true);
+//		leftDrive.reverseOutput(true);
+//		rightDrive.reverseOutput(true);
 		
-		drive = new RobotDrive(frontLeftDrive, rearLeftDrive, frontRightDrive, rearRightDrive);
+		drive = new RobotDrive(leftDrive, rightDrive);
 		
 		gyro = RobotMap.gyro;
 	}
 	
 	public void stopMotors()
 	{
-		frontRightDrive.set(0);
-		frontLeftDrive.set(0);
-		rearRightDrive.set(0);
-		rearLeftDrive.set(0);
+		rightDrive.set(0);
+		leftDrive.set(0);
 	}
 	
-	public void cartesianDrive(double x, double y, double rotation, double gyroAngle)
+	public void arcadeDrive(Joystick stick)
 	{
-		drive.mecanumDrive_Cartesian(x, y, rotation, gyroAngle);
-	}
-	
-	public void polarDrive(double magnitude, double direction, double rotation)
-	{
-		drive.mecanumDrive_Polar(magnitude, direction, rotation);
+		drive.arcadeDrive(stick);
 	}
 	
 	public void resetGyro()

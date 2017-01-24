@@ -57,7 +57,6 @@ public class Robot extends IterativeRobot {
 		agitator = new Agitator();
 		spinAgitator = new SpinAgitator();
 		oi = new OI();
-		vision = new VisionServer();
 		chooser.addDefault("Default Auto", new RawJoystickDrive());
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", chooser);
