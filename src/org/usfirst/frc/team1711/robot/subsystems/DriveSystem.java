@@ -33,8 +33,6 @@ public class DriveSystem extends Subsystem
 		
 		frontRightDrive = new CANTalon(1);
 		frontLeftDrive = new CANTalon(0);
-		rearRightDrive = new CANTalon(3);
-		rearLeftDrive = new CANTalon(2);
 		
 		frontLeftDrive.reverseOutput(true);
 		rearRightDrive.reverseOutput(true);
