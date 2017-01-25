@@ -15,11 +15,13 @@ import edu.wpi.first.wpilibj.vision.VisionThread;
 import org.opencv.core.Mat;
 import org.opencv.imgproc.Imgproc;
 import org.usfirst.frc.team1711.robot.commands.DriveJoystickTest;
+import org.usfirst.frc.team1711.robot.commands.LaunchProjectile;
 import org.usfirst.frc.team1711.robot.commands.RawJoystickDrive;
 import org.usfirst.frc.team1711.robot.commands.SpinAgitator;
 import org.usfirst.frc.team1711.robot.commands.TestCommands;
 import org.usfirst.frc.team1711.robot.subsystems.Agitator;
 import org.usfirst.frc.team1711.robot.subsystems.DriveSystem;
+import org.usfirst.frc.team1711.robot.subsystems.Shooter;
 import org.usfirst.frc.team1711.robot.vision.GripPipeline;
 import org.usfirst.frc.team1711.robot.vision.VisionServer;
 
@@ -35,13 +37,15 @@ public class Robot extends IterativeRobot {
 	public static DriveSystem driveSystem;
 	public static VisionServer vision;
 	public static OI oi;	
+	public static Shooter shooter;
 	VisionThread visionThread;
 	public static Agitator agitator;
-
+	
 	Command autonomousCommand;
 	Command teleopDrive;
 	Command testingGroup;
 	Command spinAgitator;
+	Command launchProjectile;
 	SendableChooser<Command> chooser = new SendableChooser<>();
 
 	/**
@@ -52,10 +56,12 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {
 		RobotMap.init(); //this line needs to be first
 		driveSystem = new DriveSystem();
+		shooter = new Shooter();
 		teleopDrive = new RawJoystickDrive();
 		testingGroup = new DriveJoystickTest();
 		agitator = new Agitator();
 		spinAgitator = new SpinAgitator();
+		launchProjectile = new LaunchProjectile();
 		oi = new OI();
 		chooser.addDefault("Default Auto", new RawJoystickDrive());
 		// chooser.addObject("My Auto", new MyAutoCommand());
