@@ -4,18 +4,21 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Shooter extends Subsystem
 {	
-	//cre4ate shooter motor object
+	//create shooter motor object
 	Talon shooterMotor;
 	public Shooter()
-	{
+	{	
+		//construct that shooter
 		shooterMotor = new Talon(1);
 	}
 	public void shoot(double speed)
 	{
+		//shoot
 		shooterMotor.set(speed);
 	}
 	public void stopShooter()
 	{
+		//stop shooter
 		shooterMotor.set(0);
 	}
 	

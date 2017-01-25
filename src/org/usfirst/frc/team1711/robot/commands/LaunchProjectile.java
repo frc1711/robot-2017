@@ -18,8 +18,8 @@ public class LaunchProjectile extends Command
 	
 	protected void execute()
 	{
-			//.5 is arbitrary testing will reveal the proper value 
-			Robot.shooter.shoot(.5);
+			//shoot real quick
+			Robot.shooter.shoot(1);
 	}
 	@Override
 	protected boolean isFinished() {
