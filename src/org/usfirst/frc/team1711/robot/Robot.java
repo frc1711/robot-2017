@@ -9,11 +9,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.vision.VisionThread;
 
 import org.usfirst.frc.team1711.robot.commands.DriveJoystickTest;
+import org.usfirst.frc.team1711.robot.commands.LaunchProjectile;
 import org.usfirst.frc.team1711.robot.commands.RawJoystickDrive;
 import org.usfirst.frc.team1711.robot.commands.SpinAgitator;
 import org.usfirst.frc.team1711.robot.subsystems.Agitator;
 import org.usfirst.frc.team1711.robot.subsystems.DriveSystem;
-import org.usfirst.frc.team1711.robot.vision.VisionServer;
+import org.usfirst.frc.team1711.robot.subsystems.Shooter;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -25,15 +26,16 @@ import org.usfirst.frc.team1711.robot.vision.VisionServer;
 public class Robot extends IterativeRobot {
 
 	public static DriveSystem driveSystem;
-	public static VisionServer vision;
 	public static OI oi;	
+	public static Shooter shooter;
 	VisionThread visionThread;
 	public static Agitator agitator;
-
+	
 	Command autonomousCommand;
 	Command teleopDrive;
 	Command testingGroup;
 	Command spinAgitator;
+	Command launchProjectile;
 	SendableChooser<Command> chooser = new SendableChooser<>();
 
 	/**
@@ -44,12 +46,13 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {
 		RobotMap.init(); //this line needs to be first
 		driveSystem = new DriveSystem();
+		shooter = new Shooter();
 		teleopDrive = new RawJoystickDrive();
 		testingGroup = new DriveJoystickTest();
 		agitator = new Agitator();
 		spinAgitator = new SpinAgitator();
+		launchProjectile = new LaunchProjectile();
 		oi = new OI();
-		vision = new VisionServer();
 		chooser.addDefault("Default Auto", new RawJoystickDrive());
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", chooser);
@@ -116,6 +119,7 @@ public class Robot extends IterativeRobot {
 		if (autonomousCommand != null)
 			autonomousCommand.cancel();
 		teleopDrive.start();
+		spinAgitator.start();
 	}
 
 	/**
@@ -123,19 +127,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
-		spinAgitator.start();
 		Scheduler.getInstance().run();
-//		System.out.println("Front left: " + RobotMap.frontLeftDriveCANTalon.get());
-//		System.out.println("Front right: " + RobotMap.frontRightDriveCANTalon.get());
-//		System.out.println("Rear left: " + RobotMap.rearLeftDriveCANTalon.get());
-//		System.out.println("Rear right: " + RobotMap.frontLeftDriveCANTalon.get());
-		Thread visionThread = new Thread(){
-			public void run()
-			{
-				vision.visionFeed();
-			}
-		};
-		visionThread.start(); 
 	}
 
 	/**

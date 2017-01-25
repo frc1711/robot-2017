@@ -35,7 +35,7 @@ public class RawJoystickDrive extends Command
 	
 	protected void end()
 	{
-		Robot.driveSystem.polarDrive(0, 0, 0);
+		Robot.driveSystem.stopMotors();
 	}
 	
 }

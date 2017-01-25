@@ -27,7 +27,6 @@ public class DriveSystem extends Subsystem
 	{
 		leftDrive = new CANTalon(0);
 		rightDrive = new CANTalon(1);
-		
 		drive = new RobotDrive(leftDrive, rightDrive);
 		
 		gyro = RobotMap.gyro;
