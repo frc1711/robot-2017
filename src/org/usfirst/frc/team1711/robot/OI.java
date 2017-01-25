@@ -1,6 +1,7 @@
 package org.usfirst.frc.team1711.robot;
 
 import org.usfirst.frc.team1711.robot.commands.OrthoLockDrive;
+import org.usfirst.frc.team1711.robot.commands.SpinAgitator;
 
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -39,9 +40,13 @@ public class OI {
 	// until it is finished as determined by it's isFinished method.
 	// button.whenReleased(new ExampleCommand());
 	Button orthoLock = new JoystickButton(RobotMap.driverController, 1);
+	Button agitatorButton = new JoystickButton(RobotMap.driverController, 2);
+	Button shootButton = new JoystickButton(RobotMap.driverController, 3);
 	
 	public OI()
 	{
 		orthoLock.whileHeld(new OrthoLockDrive());
+		agitatorButton.whileHeld(new SpinAgitator());
+		shootButton.whileHeld(new LaunchProjectile());
 	}
 }

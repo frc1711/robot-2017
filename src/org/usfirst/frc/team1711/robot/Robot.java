@@ -34,7 +34,6 @@ public class Robot extends IterativeRobot {
 	Command autonomousCommand;
 	Command teleopDrive;
 	Command testingGroup;
-	Command spinAgitator;
 	Command launchProjectile;
 	SendableChooser<Command> chooser = new SendableChooser<>();
 
@@ -50,9 +49,9 @@ public class Robot extends IterativeRobot {
 		teleopDrive = new RawJoystickDrive();
 		testingGroup = new DriveJoystickTest();
 		agitator = new Agitator();
-		spinAgitator = new SpinAgitator();
 		launchProjectile = new LaunchProjectile();
-		oi = new OI();
+		oi = new OI(); //this line needs to be last
+		
 		chooser.addDefault("Default Auto", new RawJoystickDrive());
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", chooser);
@@ -119,7 +118,6 @@ public class Robot extends IterativeRobot {
 		if (autonomousCommand != null)
 			autonomousCommand.cancel();
 		teleopDrive.start();
-		spinAgitator.start();
 	}
 
 	/**
