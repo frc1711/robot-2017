@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.vision.VisionThread;
@@ -36,6 +37,9 @@ public class Robot extends IterativeRobot {
 	Command testingGroup;
 	Command launchProjectile;
 	SendableChooser<Command> chooser = new SendableChooser<>();
+	
+	//used to communicate with the ds and pi
+	NetworkTable table;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -55,6 +59,15 @@ public class Robot extends IterativeRobot {
 		chooser.addDefault("Default Auto", new RawJoystickDrive());
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", chooser);
+		
+		try
+		{
+			table = NetworkTable.getTable("datatable");
+		}
+		catch(Exception e)
+		{
+			System.out.println("Error. Specified table was not found");
+		}
 	    
 	}
 
@@ -126,6 +139,8 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+		double number = System.currentTimeMillis();
+		table.putNumber("datatable", number);
 	}
 
 	/**
