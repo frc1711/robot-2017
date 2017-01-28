@@ -19,7 +19,7 @@ public class Lift extends Subsystem {
 		liftSwitch = new DigitalInput(0);
 	}
 	
-	public boolean limitSwitchIsOpen()
+	public boolean getLimitSwtich()
 		{
 		return liftSwitch.get();
 		}

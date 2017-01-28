@@ -15,6 +15,8 @@ import org.usfirst.frc.team1711.robot.commands.RawJoystickDrive;
 import org.usfirst.frc.team1711.robot.commands.SpinAgitator;
 import org.usfirst.frc.team1711.robot.subsystems.Agitator;
 import org.usfirst.frc.team1711.robot.subsystems.DriveSystem;
+import org.usfirst.frc.team1711.robot.subsystems.Intake;
+import org.usfirst.frc.team1711.robot.subsystems.Lift;
 import org.usfirst.frc.team1711.robot.subsystems.Shooter;
 
 /**
@@ -31,6 +33,8 @@ public class Robot extends IterativeRobot {
 	public static Shooter shooter;
 	VisionThread visionThread;
 	public static Agitator agitator;
+	public static Intake intake;
+	public static Lift lift;
 	
 	Command autonomousCommand;
 	Command teleopDrive;
@@ -50,6 +54,8 @@ public class Robot extends IterativeRobot {
 		RobotMap.init(); //this line needs to be first
 		driveSystem = new DriveSystem();
 		shooter = new Shooter();
+		lift = new Lift();
+		intake = new Intake();
 		teleopDrive = new RawJoystickDrive();
 		testingGroup = new DriveJoystickTest();
 		agitator = new Agitator();
