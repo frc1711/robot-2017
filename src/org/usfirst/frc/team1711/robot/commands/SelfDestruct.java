@@ -1,5 +1,7 @@
 package org.usfirst.frc.team1711.robot.commands;
 
+import org.usfirst.frc.team1711.robot.Robot;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -10,6 +12,9 @@ public class SelfDestruct extends Command {
     public SelfDestruct() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
+    	requires(Robot.agitator);
+    	requires(Robot.driveSystem);
+    	requires(Robot.intake);
     }
 
     // Called just before this Command runs the first time
@@ -18,7 +23,7 @@ public class SelfDestruct extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	while(1>0)
+    	
     }
 
     // Make this return true when this Command no longer needs to run execute()

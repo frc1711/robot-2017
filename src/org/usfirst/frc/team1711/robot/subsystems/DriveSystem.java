@@ -12,8 +12,10 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class DriveSystem extends Subsystem
 {
 	//Motor controllers
-	CANTalon leftDrive;
-	CANTalon rightDrive;
+	CANTalon leftFrontDrive;
+	CANTalon rightFrontDrive;
+	CANTalon leftRearDrive;
+	CANTalon rightRearDrive;
 	
 	RobotDrive drive;
 	
@@ -25,17 +27,22 @@ public class DriveSystem extends Subsystem
 	
 	public DriveSystem()
 	{
-		leftDrive = new CANTalon(0);
-		rightDrive = new CANTalon(1);
-		drive = new RobotDrive(leftDrive, rightDrive);
+		leftFrontDrive = new CANTalon(0);
+		rightFrontDrive = new CANTalon(1);
+		leftRearDrive = new CANTalon(2);
+		rightRearDrive = new CANTalon(3);
+		
+		drive = new RobotDrive(leftFrontDrive, rightFrontDrive, leftRearDrive, rightRearDrive);
 		
 		gyro = RobotMap.gyro;
 	}
 	
 	public void stopMotors()
 	{
-		leftDrive.set(0);
-		rightDrive.set(0);
+		leftFrontDrive.set(0);
+		rightFrontDrive.set(0);
+		leftRearDrive.set(0);
+		rightRearDrive.set(0);
 	}
 	
 	public void arcadeDrive(Joystick stick)
