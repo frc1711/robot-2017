@@ -22,6 +22,5 @@ public class PiNetworkTable
 
 		double number = System.currentTimeMillis();
 		table.putNumber("datatable", number);
-		table.addTableListener(key, listener, immediateNotify);
 	}
 }
