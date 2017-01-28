@@ -37,9 +37,6 @@ public class Robot extends IterativeRobot {
 	Command testingGroup;
 	Command launchProjectile;
 	SendableChooser<Command> chooser = new SendableChooser<>();
-	
-	//used to communicate with the ds and pi
-	NetworkTable table;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -58,17 +55,7 @@ public class Robot extends IterativeRobot {
 		
 		chooser.addDefault("Default Auto", new RawJoystickDrive());
 		// chooser.addObject("My Auto", new MyAutoCommand());
-		SmartDashboard.putData("Auto mode", chooser);
-		
-		try
-		{
-			table = NetworkTable.getTable("datatable");
-		}
-		catch(Exception e)
-		{
-			System.out.println("Error. Specified table was not found");
-		}
-	    
+		SmartDashboard.putData("Auto mode", chooser); 
 	}
 
 	/**
@@ -139,8 +126,6 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-		double number = System.currentTimeMillis();
-		table.putNumber("datatable", number);
 	}
 
 	/**
