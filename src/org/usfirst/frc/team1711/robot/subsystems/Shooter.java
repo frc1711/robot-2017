@@ -9,7 +9,7 @@ public class Shooter extends Subsystem
 	public Shooter()
 	{	
 		//construct that shooter
-		shooterMotor = new Talon(1);
+		shooterMotor = new Talon(2);
 	}
 	public void shoot(double speed)
 	{
