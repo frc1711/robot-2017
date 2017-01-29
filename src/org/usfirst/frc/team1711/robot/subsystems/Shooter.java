@@ -12,11 +12,7 @@ public class Shooter extends Subsystem
 	public Shooter()
 	{	
 		//construct that shooter
-<<<<<<< HEAD
 		shooterMotor = RobotMap.shooterMotor;
-=======
-		shooterMotor = new Talon(2);
->>>>>>> 5690a8719728ebdb34a3d871d1f8b270e50ada1e
 	}
 	public void shoot(double speed)
 	{
