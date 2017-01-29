@@ -1,14 +1,17 @@
 package org.usfirst.frc.team1711.robot.subsystems;
 
+import org.usfirst.frc.team1711.robot.RobotMap;
+
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Agitator extends Subsystem
 {
 	Talon agitatorMotor;
+	
 	public Agitator()
 	{
-		agitatorMotor = new Talon(0);
+		agitatorMotor = RobotMap.agitatorMotor;
 	}
 	public void agitate(double speed)
 	{

@@ -27,10 +27,10 @@ public class DriveSystem extends Subsystem
 	
 	public DriveSystem()
 	{
-		leftFrontDrive = new CANTalon(0);
-		rightFrontDrive = new CANTalon(1);
-		leftRearDrive = new CANTalon(2);
-		rightRearDrive = new CANTalon(3);
+		leftFrontDrive = RobotMap.frontLeftDriveCANTalon;
+		rightFrontDrive = RobotMap.frontRightDriveCANTalon;
+		leftRearDrive = RobotMap.rearLeftDriveCANTalon;
+		rightRearDrive = RobotMap.rearRightDriveCANTalon;
 		
 		drive = new RobotDrive(leftFrontDrive, rightFrontDrive, leftRearDrive, rightRearDrive);
 		

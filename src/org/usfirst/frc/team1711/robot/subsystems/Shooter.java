@@ -1,4 +1,6 @@
 package org.usfirst.frc.team1711.robot.subsystems;
+import org.usfirst.frc.team1711.robot.RobotMap;
+
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -6,10 +8,11 @@ public class Shooter extends Subsystem
 {	
 	//create shooter motor object
 	Talon shooterMotor;
+	
 	public Shooter()
 	{	
 		//construct that shooter
-		shooterMotor = new Talon(1);
+		shooterMotor = RobotMap.shooterMotor;
 	}
 	public void shoot(double speed)
 	{

@@ -3,7 +3,9 @@ package org.usfirst.frc.team1711.robot;
 import com.ctre.CANTalon;
 
 import edu.wpi.first.wpilibj.AnalogGyro;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.Talon;
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -18,24 +20,38 @@ public class RobotMap {
 	public static CANTalon frontRightDriveCANTalon;
 	public static CANTalon rearLeftDriveCANTalon;
 	public static CANTalon rearRightDriveCANTalon;
+	public static Talon agitatorMotor;
+	public static Talon intakeMotor;
+	public static CANTalon liftMotor;
+	public static Talon shooterMotor;
 	
 	//Joysticks
 	public static Joystick driverController;
 	
 	//Sensors
 	public static AnalogGyro gyro;
+	public static DigitalInput liftSwitch;
 	
 	public static void init()
 	{
 		driverController = new Joystick(0);
-		//these are not the right magic numbers
-		//I need to figure out the right magic numbers
+		
+		//CAN bus assignments
 		frontLeftDriveCANTalon = new CANTalon(0);
 		frontRightDriveCANTalon = new CANTalon(1);
 		rearLeftDriveCANTalon = new CANTalon(2);
 		rearRightDriveCANTalon = new CANTalon(3);
+		liftMotor = new CANTalon(4);
 		
-		//this is the analog port being used
+		//PWM port assignments
+		agitatorMotor = new Talon(0);
+		intakeMotor = new Talon(1);
+		shooterMotor = new Talon(2);
+		
+		//Analog port assignments
 		gyro = new AnalogGyro(0);
+		
+		//Digital port assignments
+		liftSwitch = new DigitalInput(0);
 	}
 }

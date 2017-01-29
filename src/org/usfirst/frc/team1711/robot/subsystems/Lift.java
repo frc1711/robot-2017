@@ -1,5 +1,7 @@
 package org.usfirst.frc.team1711.robot.subsystems;
 
+import org.usfirst.frc.team1711.robot.RobotMap;
+
 import com.ctre.CANTalon;
 
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -15,8 +17,8 @@ public class Lift extends Subsystem {
 	
 	public Lift()
 	{
-		liftMotor = new CANTalon(4); 
-		liftSwitch = new DigitalInput(0);
+		liftMotor = RobotMap.liftMotor; 
+		liftSwitch = RobotMap.liftSwitch;
 	}
 	
 	public boolean getLimitSwtich()

@@ -1,5 +1,7 @@
 package org.usfirst.frc.team1711.robot.subsystems;
 
+import org.usfirst.frc.team1711.robot.RobotMap;
+
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -12,7 +14,7 @@ public class Intake extends Subsystem {
 	
 	public Intake()
 	{
-		intakeMotor = new Talon(1);
+		intakeMotor = RobotMap.intakeMotor;
 	}
 	
 	
