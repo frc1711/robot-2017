@@ -13,6 +13,7 @@ import org.usfirst.frc.team1711.robot.commands.DriveJoystickTest;
 import org.usfirst.frc.team1711.robot.commands.LaunchProjectile;
 import org.usfirst.frc.team1711.robot.commands.RawJoystickDrive;
 import org.usfirst.frc.team1711.robot.commands.SpinAgitator;
+import org.usfirst.frc.team1711.robot.networking.PiNetworkTable;
 import org.usfirst.frc.team1711.robot.subsystems.Agitator;
 import org.usfirst.frc.team1711.robot.subsystems.DriveSystem;
 import org.usfirst.frc.team1711.robot.subsystems.Intake;
@@ -35,6 +36,7 @@ public class Robot extends IterativeRobot {
 	public static Agitator agitator;
 	public static Intake intake;
 	public static Lift lift;
+	public static PiNetworkTable piNet;
 	
 	Command autonomousCommand;
 	Command teleopDrive;
@@ -57,6 +59,7 @@ public class Robot extends IterativeRobot {
 		testingGroup = new DriveJoystickTest();
 		agitator = new Agitator();
 		launchProjectile = new LaunchProjectile();
+		piNet = new PiNetworkTable();
 		oi = new OI(); //this line needs to be last
 		
 		chooser.addDefault("Default Auto", new RawJoystickDrive());
@@ -132,6 +135,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+		piNet.systemTest();
 	}
 
 	/**

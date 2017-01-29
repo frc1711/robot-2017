@@ -21,7 +21,7 @@ public class Lift extends Subsystem {
 		liftSwitch = RobotMap.liftSwitch;
 	}
 	
-	public boolean getLimitSwtich()
+	public boolean getLimitSwitch()
 		{
 		return liftSwitch.get();
 		}
