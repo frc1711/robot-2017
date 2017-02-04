@@ -4,6 +4,7 @@ import com.ctre.CANTalon;
 
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Talon;
 
@@ -31,6 +32,7 @@ public class RobotMap {
 	//Sensors
 	public static AnalogGyro gyro;
 	public static DigitalInput liftSwitch;
+	public static Encoder shooterEncoder;
 	
 	public static void init()
 	{
@@ -53,5 +55,6 @@ public class RobotMap {
 		
 		//Digital port assignments
 		liftSwitch = new DigitalInput(0);
+		shooterEncoder = new Encoder(-1,-1);
 	}
 }
