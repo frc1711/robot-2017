@@ -47,7 +47,7 @@ public class OI {
 	public OI()
 	{
 		orthoLock.whileHeld(new OrthoLockDrive());
-		agitatorButton.whileHeld(new SpinAgitator());
+		agitatorButton.whileHeld(new SpinAgitator(.1));
 		shootButton.whileHeld(new LaunchProjectile());
 	}
 }
