@@ -12,7 +12,7 @@ public class Shooter extends PIDSubsystem
 {	
 	//create shooter motor object
 	CANTalon shooterMotor = RobotMap.shooterMotor;
-	Encoder shooterEncoder = RobotMap.shooterEncoder;
+//	Encoder shooterEncoder = RobotMap.shooterEncoder;
 	public Shooter()
 	{	
 		super("Shooter", 0.0, 1.0, 0.0);
@@ -23,8 +23,8 @@ public class Shooter extends PIDSubsystem
 	}
 	protected double returnPIDInput()
 	{
-		return shooterEncoder.getRate();
-	}
+		return  5;//shooterEncoder.getRate();
+	} 
 	protected void usePIDOutput(double output)
 	{
 		shooterMotor.pidWrite(output);

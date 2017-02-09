@@ -32,17 +32,17 @@ public class RobotMap {
 	//Sensors
 	public static AnalogGyro gyro;
 	public static DigitalInput liftSwitch;
-	public static Encoder shooterEncoder;
+//	public static Encoder shooterEncoder;
 	
 	public static void init()
 	{
 		driverController = new Joystick(0);
 		
 		//CAN bus assignments
-		frontLeftDriveCANTalon = new CANTalon(0);
-		frontRightDriveCANTalon = new CANTalon(1);
-		rearLeftDriveCANTalon = new CANTalon(2);
-		rearRightDriveCANTalon = new CANTalon(3);
+		frontLeftDriveCANTalon = new CANTalon(1);
+		frontRightDriveCANTalon = new CANTalon(3);
+		rearLeftDriveCANTalon = new CANTalon(0);
+		rearRightDriveCANTalon = new CANTalon(2);
 		liftMotor = new CANTalon(4);
 		
 		//PWM port assignments
@@ -55,6 +55,6 @@ public class RobotMap {
 		
 		//Digital port assignments
 		liftSwitch = new DigitalInput(0);
-		shooterEncoder = new Encoder(-1,-1);
+//		shooterEncoder = new Encoder(-1,-1);
 	}
 }

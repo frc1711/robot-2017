@@ -6,10 +6,13 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class SpinAgitator extends Command
 {
+	double speed;
 	
-	public SpinAgitator()
+	public SpinAgitator(double speed)
 	{
 		requires(Robot.agitator);
+		this.speed = speed;
+		setTimeout(1);
 	}
 	
 	protected void initialize()
@@ -17,14 +20,13 @@ public class SpinAgitator extends Command
 	}
 	
 	protected void execute()
-	{
-			//.5 is arbitrary testing will reveal the proper value 
-			Robot.agitator.agitate(.5);
+	{ 
+		Robot.agitator.agitate(speed);
 	}
 	@Override
 	protected boolean isFinished() {
 		// TODO Auto-generated method stub
-		return false;
+		return isTimedOut();
 	}
 	
 	protected void end()

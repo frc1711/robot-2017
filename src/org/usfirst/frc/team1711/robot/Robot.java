@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.vision.VisionThread;
 
 import org.usfirst.frc.team1711.robot.commands.DriveJoystickTest;
 import org.usfirst.frc.team1711.robot.commands.LaunchProjectile;
+import org.usfirst.frc.team1711.robot.commands.Oscillate;
 import org.usfirst.frc.team1711.robot.commands.RawJoystickDrive;
 import org.usfirst.frc.team1711.robot.commands.SpinAgitator;
 import org.usfirst.frc.team1711.robot.networking.PiNetworkTable;
@@ -42,6 +43,7 @@ public class Robot extends IterativeRobot {
 	Command teleopDrive;
 	Command testingGroup;
 	Command launchProjectile;
+	Command oscillator;
 	SendableChooser<Command> chooser = new SendableChooser<>();
 
 	/**
@@ -60,6 +62,7 @@ public class Robot extends IterativeRobot {
 		agitator = new Agitator();
 		launchProjectile = new LaunchProjectile();
 		piNet = new PiNetworkTable();
+		oscillator = new Oscillate();
 		oi = new OI(); //this line needs to be last
 		
 		chooser.addDefault("Default Auto", new RawJoystickDrive());
@@ -145,9 +148,6 @@ public class Robot extends IterativeRobot {
 	public void testPeriodic() {
 		//this is basically our debugger
 		LiveWindow.run();
-//		testingGroup.start();
-//		System.out.println("Drive stick magnitude: " + RobotMap.driverController.getMagnitude());
-//		System.out.println("Drive direction in degrees: " + RobotMap.driverController.getDirectionDegrees());
-
+		oscillator.start();
 	}
 }
