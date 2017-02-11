@@ -39,9 +39,9 @@ public class Shooter extends PIDSubsystem
 		p = Preferences.getInstance().getDouble("P",0.0);
 		i = Preferences.getInstance().getDouble("I",1.0);
 		d = Preferences.getInstance().getDouble("D",0.0);
-		SmartDashboard.putNumber("P",p);
-		SmartDashboard.putNumber("I",i);
-		SmartDashboard.putNumber("D",d);
+		SmartDashboard.putNumber("P",getPIDController().getP());
+		SmartDashboard.putNumber("I",getPIDController().getI());
+		SmartDashboard.putNumber("D",getPIDController().getD());
 		getPIDController().setPID(p,i,d);
 	}
 	public void shoot(double speed)

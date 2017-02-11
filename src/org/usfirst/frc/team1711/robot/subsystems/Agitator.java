@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Agitator extends Subsystem
 {
-	Talon agitatorMotor;
+	CANTalon agitatorMotor;
 	
 	public Agitator()
 	{
