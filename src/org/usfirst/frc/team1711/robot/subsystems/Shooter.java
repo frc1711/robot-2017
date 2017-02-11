@@ -14,7 +14,7 @@ public class Shooter extends PIDSubsystem
 {	
 	//create shooter motor object
 	CANTalon shooterMotor = RobotMap.shooterMotor;
-//	Encoder shooterEncoder = RobotMap.shooterEncoder;
+//	Encoder shooterEncoder =  RobotMap.shooterEncoder;
 	static Preferences prefs;
 	public static double p = 0.0; 
 	public static double i = 1.0; 

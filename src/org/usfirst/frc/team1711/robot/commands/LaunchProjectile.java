@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class LaunchProjectile extends Command
 {
-	
+	 
 	public LaunchProjectile()
 	{
 		requires(Robot.shooter);

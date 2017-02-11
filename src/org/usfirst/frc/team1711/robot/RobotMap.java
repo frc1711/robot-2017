@@ -16,7 +16,7 @@ import edu.wpi.first.wpilibj.Talon;
  */
 public class RobotMap {
 	
-	//Motor controllers
+	//Motor control lers
 	public static CANTalon frontLeftDriveCANTalon;
 	public static CANTalon frontRightDriveCANTalon;
 	public static CANTalon rearLeftDriveCANTalon;
