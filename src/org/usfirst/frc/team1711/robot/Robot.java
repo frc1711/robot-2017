@@ -55,6 +55,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void robotInit() {
 		RobotMap.init(); //this line needs to be first
+		shooter.dashBoardControl();
 		driveSystem = new DriveSystem();
 		shooter = new Shooter();
 		lift = new Lift();
@@ -130,7 +131,6 @@ public class Robot extends IterativeRobot {
 		// continue until interrupted by another command, remove
 		// this line or comment it out.
 		if (autonomousCommand != null)
-			
 			autonomousCommand.cancel();
 		teleopDrive.start();
 	}

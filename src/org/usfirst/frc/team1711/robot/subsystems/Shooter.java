@@ -16,9 +16,9 @@ public class Shooter extends PIDSubsystem
 	CANTalon shooterMotor = RobotMap.shooterMotor;
 //	Encoder shooterEncoder = RobotMap.shooterEncoder;
 	static Preferences prefs;
-	public static double p = prefs.getDouble("P: ",0.0);
-	public static double i = prefs.getDouble("I: ",1.0);
-	public static double d = prefs.getDouble("D: ",0.0);
+	public static double p = 0.0; 
+	public static double i = 1.0; 
+	public static double d = 0.0; 
 	public Shooter()
 	{
 		super("Shooter", p, i, d);
@@ -36,6 +36,9 @@ public class Shooter extends PIDSubsystem
 		shooterMotor.pidWrite(output);
 	}
 	public void dashBoardControl(){
+		p = prefs.getDouble("P: ",0.0);
+		i = prefs.getDouble("I: ",1.0);
+		d = prefs.getDouble("D: ",0.0);
 		SmartDashboard.putNumber("P: ",p);
 		SmartDashboard.putNumber("I: ",i);
 		SmartDashboard.putNumber("D: ",d);
