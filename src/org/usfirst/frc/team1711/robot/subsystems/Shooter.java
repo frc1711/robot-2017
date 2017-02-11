@@ -18,10 +18,10 @@ public class Shooter extends PIDSubsystem
 	static Preferences prefs;
 	public static double p = 0.0; 
 	public static double i = 1.0; 
-	public static double d = 0.0; 
+	public static double d = 0.0;  
 	public Shooter()
 	{
-		super("Shooter", p, i, d);
+		super("Shooter", Preferences.getInstance().getDouble("P", 0.0), Preferences.getInstance().getDouble("I", 0.0), Preferences.getInstance().getDouble("D", 0.0));
 		//construct that shooter
 		//setAbsoluteTolerance(.2);
 		getPIDController().setContinuous(false);
@@ -36,12 +36,13 @@ public class Shooter extends PIDSubsystem
 		shooterMotor.pidWrite(output);
 	}
 	public void dashBoardControl(){
-		p = prefs.getDouble("P: ",0.0);
-		i = prefs.getDouble("I: ",1.0);
-		d = prefs.getDouble("D: ",0.0);
-		SmartDashboard.putNumber("P: ",p);
-		SmartDashboard.putNumber("I: ",i);
-		SmartDashboard.putNumber("D: ",d);
+		p = Preferences.getInstance().getDouble("P",0.0);
+		i = Preferences.getInstance().getDouble("I",1.0);
+		d = Preferences.getInstance().getDouble("D",0.0);
+		SmartDashboard.putNumber("P",p);
+		SmartDashboard.putNumber("I",i);
+		SmartDashboard.putNumber("D",d);
+		getPIDController().setPID(p,i,d);
 	}
 	public void shoot(double speed)
 	{

@@ -52,10 +52,9 @@ public class Robot extends IterativeRobot {
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
 	 */
-	@Override
+	@Override 
 	public void robotInit() {
 		RobotMap.init(); //this line needs to be first
-		shooter.dashBoardControl();
 		driveSystem = new DriveSystem();
 		shooter = new Shooter();
 		lift = new Lift();
@@ -140,6 +139,9 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
+		shooter.dashBoardControl();
+		System.out.print("P");
+		System.out.print(shooter.getPIDController().getP());
 		Scheduler.getInstance().run();
 		piNet.systemTest();
 	}
