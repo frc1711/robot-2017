@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
 public class Oscillate extends CommandGroup {
 
     public Oscillate() {
-        addSequential(new SpinAgitator(.01));
-        addSequential(new SpinAgitator(-.01));
+        addSequential(new SpinAgitator(.25));
+        addSequential(new SpinAgitator(-.25));
     }
 }

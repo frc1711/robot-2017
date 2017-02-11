@@ -20,6 +20,7 @@ public class LaunchProjectile extends Command
 	{
 			//shoot real quick
 			Robot.shooter.shoot(1);
+			Robot.shooter.dashBoardControl();
 	}
 	@Override
 	protected boolean isFinished() {

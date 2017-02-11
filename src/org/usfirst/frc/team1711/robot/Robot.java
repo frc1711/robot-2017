@@ -1,6 +1,7 @@
 package org.usfirst.frc.team1711.robot;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -30,6 +31,7 @@ import org.usfirst.frc.team1711.robot.subsystems.Shooter;
  */
 public class Robot extends IterativeRobot {
 
+	Preferences prefs;
 	public static DriveSystem driveSystem;
 	public static OI oi;	
 	public static Shooter shooter;
@@ -128,6 +130,7 @@ public class Robot extends IterativeRobot {
 		// continue until interrupted by another command, remove
 		// this line or comment it out.
 		if (autonomousCommand != null)
+			
 			autonomousCommand.cancel();
 		teleopDrive.start();
 	}
@@ -148,6 +151,5 @@ public class Robot extends IterativeRobot {
 	public void testPeriodic() {
 		//this is basically our debugger
 		LiveWindow.run();
-		oscillator.start();
 	}
 }

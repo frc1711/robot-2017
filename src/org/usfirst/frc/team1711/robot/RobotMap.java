@@ -21,7 +21,8 @@ public class RobotMap {
 	public static CANTalon frontRightDriveCANTalon;
 	public static CANTalon rearLeftDriveCANTalon;
 	public static CANTalon rearRightDriveCANTalon;
-	public static CANTalon agitatorMotor;
+//	public static CANTalon agitatorMotor;
+	public static Talon agitatorMotor;
 	public static CANTalon intakeMotor;
 	public static CANTalon liftMotor;
 	public static CANTalon shooterMotor;
@@ -46,7 +47,8 @@ public class RobotMap {
 		liftMotor = new CANTalon(4);
 		
 		//PWM port assignments
-		agitatorMotor = new CANTalon(5);
+//		agitatorMotor = new CANTalon(5);
+		agitatorMotor = new Talon(5);
 		intakeMotor = new CANTalon(6);
 		shooterMotor = new CANTalon(7);
 		
