@@ -9,7 +9,8 @@ public class LaunchProjectile extends Command
 	 
 	public LaunchProjectile()
 	{
-		requires(Robot.shooter);
+		requires(Robot.leftShooter);
+		requires(Robot.rightShooter);
 	}
 	
 	protected void initialize()
@@ -19,8 +20,10 @@ public class LaunchProjectile extends Command
 	protected void execute()
 	{
 			//shoot real quick
-			Robot.shooter.shoot(1);
-			Robot.shooter.dashBoardControl();
+			Robot.leftShooter.shoot(1);
+			Robot.rightShooter.shoot(1);
+			Robot.leftShooter.dashBoardControl();
+			Robot.rightShooter.dashBoardControl();
 	}
 	@Override
 	protected boolean isFinished() {
@@ -30,7 +33,8 @@ public class LaunchProjectile extends Command
 	
 	protected void end()
 	{
-		Robot.shooter.shoot(0);
+		Robot.leftShooter.shoot(0);
+		Robot.rightShooter.shoot(0);
 	}
 
 	@Override

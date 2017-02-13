@@ -24,7 +24,8 @@ public class RobotMap {
 	public static CANTalon agitatorMotor;
 	public static CANTalon intakeMotor;
 	public static CANTalon liftMotor;
-	public static CANTalon shooterMotor;
+	public static CANTalon leftShooterMotor;
+	public static CANTalon rightShooterMotor;
 	
 	//Joysticks
 	public static Joystick driverController;
@@ -48,7 +49,8 @@ public class RobotMap {
 		//PWM port assignments
 		agitatorMotor = new CANTalon(5);
 		intakeMotor = new CANTalon(6);
-		shooterMotor = new CANTalon(7);
+		leftShooterMotor = new CANTalon(7);
+		rightShooterMotor = new CANTalon(8);
 		
 		//Analog port assignments
 		gyro = new AnalogGyro(0);

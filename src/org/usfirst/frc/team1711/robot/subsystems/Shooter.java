@@ -10,18 +10,21 @@ import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import com.ctre.CANTalon;
+
 public class Shooter extends PIDSubsystem
 {	
-	//create shooter motor object
-	CANTalon shooterMotor = RobotMap.shooterMotor;
+	CANTalon shooterMotor;
 //	Encoder shooterEncoder =  RobotMap.shooterEncoder;
 	static Preferences prefs;
 	public static double p = 0.0; 
 	public static double i = 1.0; 
 	public static double d = 0.0;  
-	public Shooter()
+	
+	public Shooter(CANTalon shooterMotor)
 	{
 		super("Shooter", Preferences.getInstance().getDouble("P", 0.0), Preferences.getInstance().getDouble("I", 0.0), Preferences.getInstance().getDouble("D", 0.0));
+		this.shooterMotor = shooterMotor;
 		//construct that shooter
 		//setAbsoluteTolerance(.2);
 		getPIDController().setContinuous(false);

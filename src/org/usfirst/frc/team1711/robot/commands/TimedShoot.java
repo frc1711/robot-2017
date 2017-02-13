@@ -11,7 +11,8 @@ public class TimedShoot extends TimedCommand {
 
     public TimedShoot(double timeout) {
         super(timeout);
-        requires(Robot.shooter);
+        requires(Robot.leftShooter);
+        requires(Robot.rightShooter);
       
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
@@ -25,8 +26,8 @@ public class TimedShoot extends TimedCommand {
     protected void execute()
     {
     	
-    	Robot.shooter.shoot(.75);
-    	
+    	Robot.leftShooter.shoot(.75);
+    	Robot.rightShooter.shoot(.75);
     }
 
     // Called once after timeout

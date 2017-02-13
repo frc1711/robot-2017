@@ -34,7 +34,8 @@ public class Robot extends IterativeRobot {
 	Preferences prefs;
 	public static DriveSystem driveSystem;
 	public static OI oi;	
-	public static Shooter shooter;
+	public static Shooter leftShooter;
+	public static Shooter rightShooter;
 	VisionThread visionThread;
 	public static Agitator agitator;
 	public static Intake intake;
@@ -56,7 +57,8 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {
 		RobotMap.init(); //this line needs to be first
 		driveSystem = new DriveSystem();
-		shooter = new Shooter();
+		leftShooter = new Shooter(RobotMap.leftShooterMotor);
+		rightShooter = new Shooter(RobotMap.rightShooterMotor);
 		lift = new Lift();
 		intake = new Intake();
 		teleopDrive = new RawJoystickDrive();
@@ -139,11 +141,12 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
-		shooter.dashBoardControl();
-		System.out.print("P");
-		System.out.print(shooter.getPIDController().getP());
 		Scheduler.getInstance().run();
-		piNet.systemTest();
+		leftShooter.dashBoardControl();
+		rightShooter.dashBoardControl();
+//		System.out.print("P");
+//		System.out.print(shooter.getPIDController().getP());
+		System.out.println(piNet.getAngleDifference());
 	}
 
 	/**

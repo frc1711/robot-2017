@@ -19,8 +19,14 @@ public class PiNetworkTable
 	
 	public void systemTest()
 	{
-
 		double number = System.currentTimeMillis();
 		table.putNumber("datatable", number);
+	}
+	
+	public double getAngleDifference()
+	{
+		double angleDifference = table.getNumber("angle difference", 0);
+		table.putNumber("angle" , angleDifference);
+		return angleDifference;
 	}
 }
