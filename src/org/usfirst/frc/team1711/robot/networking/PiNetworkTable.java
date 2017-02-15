@@ -26,7 +26,12 @@ public class PiNetworkTable
 	public double getAngleDifference()
 	{
 		double angleDifference = table.getNumber("angle difference", 0);
-		table.putNumber("angle" , angleDifference);
 		return angleDifference;
+	}
+	
+	public double getDistance()
+	{
+		double distance = table.getNumber("distance from target", 0);
+		return distance;
 	}
 }

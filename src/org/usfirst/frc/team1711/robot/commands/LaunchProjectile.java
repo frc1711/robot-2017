@@ -1,5 +1,6 @@
 package org.usfirst.frc.team1711.robot.commands;
 
+import org.usfirst.frc.team1711.robot.OI;
 import org.usfirst.frc.team1711.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -40,7 +41,8 @@ public class LaunchProjectile extends Command
 	@Override
 	protected void interrupted() {
 		// TODO Auto-generated method stub
-		
+		Robot.leftShooter.shoot(0);
+		Robot.rightShooter.shoot(0);
 	}
 	
 }

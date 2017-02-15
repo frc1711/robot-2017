@@ -21,7 +21,7 @@ public class RawJoystickDrive extends Command
 	
 	protected void execute()
 	{
-		if(RobotMap.driverController.getMagnitude() > .1)
+		if((RobotMap.driverController.getMagnitude() > .1))
 		{
 			Robot.driveSystem.arcadeDrive(RobotMap.driverController);
 		}

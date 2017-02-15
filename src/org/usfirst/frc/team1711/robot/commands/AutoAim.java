@@ -1,18 +1,21 @@
 package org.usfirst.frc.team1711.robot.commands;
 
-import org.usfirst.frc.team1711.robot.Robot;
-
 import edu.wpi.first.wpilibj.command.Command;
+import org.usfirst.frc.team1711.robot.Robot;
+import org.usfirst.frc.team1711.robot.RobotMap;
+import org.usfirst.frc.team1711.robot.networking.*;
 
 /**
  *
  */
-public class Absorb extends Command {
+public class AutoAim extends Command {
 
-    public Absorb() {
+	public boolean isDone = false;
+	public double sweetSpot = 0;
+	
+    public AutoAim() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.intake);
     }
 
     // Called just before this Command runs the first time
@@ -21,22 +24,35 @@ public class Absorb extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.intake.absorb(.5);
+    	while(Robot.piNet.getDistance() < sweetSpot)
+    	{
+    		Robot.driveSystem.driveForward(.5);
+    	}
+    	
+    	while(Robot.piNet.getAngleDifference() < 0)
+    	{
+    		Robot.driveSystem.turnLeft(.25);
+    	}
+    	isDone = true;
+    	
+    	while(Robot.piNet.getAngleDifference() > 0)
+    	{
+    		Robot.driveSystem.turnRight(.25);
+    	}
+    	isDone = true;
     }
-
+    
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return isDone;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.intake.absorb(0);
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	Robot.intake.absorb(0);
     }
 }

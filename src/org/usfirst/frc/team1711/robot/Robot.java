@@ -72,6 +72,8 @@ public class Robot extends IterativeRobot {
 		chooser.addDefault("Default Auto", new RawJoystickDrive());
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", chooser); 
+		
+		driveSystem.resetGyro();
 	}
 
 	/**
@@ -146,7 +148,7 @@ public class Robot extends IterativeRobot {
 		rightShooter.dashBoardControl();
 //		System.out.print("P");
 //		System.out.print(shooter.getPIDController().getP());
-		System.out.println(piNet.getAngleDifference());
+		System.out.println(driveSystem.getGyroAngle());
 	}
 
 	/**

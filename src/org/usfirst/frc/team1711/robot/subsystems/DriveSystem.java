@@ -5,6 +5,7 @@ import org.usfirst.frc.team1711.robot.RobotMap;
 import com.ctre.CANTalon;
 
 import edu.wpi.first.wpilibj.AnalogGyro;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -16,6 +17,9 @@ public class DriveSystem extends Subsystem
 	CANTalon rightFrontDrive;
 	CANTalon leftRearDrive;
 	CANTalon rightRearDrive;
+	
+	Encoder leftDriveEncoder;
+	Encoder rightDriveEncoder;
 	
 	RobotDrive drive;
 	
@@ -31,6 +35,11 @@ public class DriveSystem extends Subsystem
 		rightFrontDrive = RobotMap.frontRightDriveCANTalon;
 		leftRearDrive = RobotMap.rearLeftDriveCANTalon;
 		rightRearDrive = RobotMap.rearRightDriveCANTalon;
+		
+//		leftDriveEncoder = RobotMap.leftDriveEncoder;
+//		rightDriveEncoder = RobotMap.rightDriveEncoder;
+		
+		//set encoder stuff here
 		
 		drive = new RobotDrive(leftFrontDrive, leftRearDrive, rightFrontDrive, rightRearDrive);
 		
@@ -50,9 +59,38 @@ public class DriveSystem extends Subsystem
 		drive.arcadeDrive(stick);
 	}
 	
+	public void driveForward(double speed)
+	{
+		leftFrontDrive.set(speed);
+		leftRearDrive.set(speed);
+		rightFrontDrive.set(speed);
+		rightRearDrive.set(speed);
+	}
+	
+	public void turnLeft(double speed)
+	{
+		leftFrontDrive.set(-speed);
+		leftRearDrive.set(-speed);
+		rightFrontDrive.set(speed);
+		rightRearDrive.set(speed);
+	}
+	
+	public void turnRight(double speed)
+	{
+		leftFrontDrive.set(speed);
+		leftRearDrive.set(speed);
+		rightFrontDrive.set(-speed);
+		rightRearDrive.set(-speed);
+	}
+	
 	public void resetGyro()
 	{
 		gero = gyro.getAngle();
+	}
+	
+	public double getGyroRate()
+	{
+		return gyro.getRate();
 	}
 	
 	public double getGyroAngle()

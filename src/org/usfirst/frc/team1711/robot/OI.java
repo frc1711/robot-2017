@@ -1,5 +1,6 @@
 package org.usfirst.frc.team1711.robot;
 
+import org.usfirst.frc.team1711.robot.commands.Absorb;
 import org.usfirst.frc.team1711.robot.commands.LaunchProjectile;
 import org.usfirst.frc.team1711.robot.commands.OrthoLockDrive;
 import org.usfirst.frc.team1711.robot.commands.SpinAgitator;
@@ -40,14 +41,15 @@ public class OI {
 	// Start the command when the button is released and let it run the command
 	// until it is finished as determined by it's isFinished method.
 	// button.whenReleased(new ExampleCommand());
-	Button orthoLock = new JoystickButton(RobotMap.driverController, 1);
+	Button intakeButton = new JoystickButton(RobotMap.driverController, 1);
 	Button agitatorButton = new JoystickButton(RobotMap.driverController, 2);
 	Button shootButton = new JoystickButton(RobotMap.driverController, 3);
 	
 	public OI()
 	{
-/*		orthoLock.whileHeld(new OrthoLockDrive());
-		agitatorButton.whileHeld(new SpinAgitator(.1));
-		shootButton.whileHeld(new LaunchProjectile()); */
+//		orthoLock.whileHeld(new OrthoLockDrive());
+//		agitatorButton.whileHeld(new SpinAgitator(.1));
+		intakeButton.whileHeld(new Absorb());
+		shootButton.whileHeld(new LaunchProjectile());
 	}
 }
