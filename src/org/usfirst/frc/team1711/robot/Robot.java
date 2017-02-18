@@ -142,8 +142,6 @@ public class Robot extends IterativeRobot {
 		leftShooter.dashBoardControl();
 		rightShooter.dashBoardControl();
 //		System.out.println(driveSystem.getGyroAngle());
-		System.out.println("Left shooter axis");
-		System.out.println(RobotMap.driverController.getRawAxis(2));
 	}
 
 	/**

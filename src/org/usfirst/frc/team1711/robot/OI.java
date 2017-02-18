@@ -42,13 +42,10 @@ public class OI {
 	// button.whenReleased(new ExampleCommand());
 	Button intakeButton = new JoystickButton(RobotMap.driverController, 1);
 	Button agitatorButton = new JoystickButton(RobotMap.driverController, 0);
-	Button shootButton = new JoystickButton(RobotMap.driverController, 3);
 	
 	public OI()
 	{
-//		orthoLock.whileHeld(new OrthoLockDrive());
-//		agitatorButton.whileHeld(new SpinAgitator(.1));
+		agitatorButton.whileHeld(new SpinAgitator());
 		intakeButton.whileHeld(new Absorb());
-		shootButton.whileHeld(new LaunchProjectile());
 	}
 }
