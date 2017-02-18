@@ -21,8 +21,8 @@ public class LaunchProjectile extends Command
 	protected void execute()
 	{
 			//shoot real quick
-			Robot.leftShooter.shoot(1);
-			Robot.rightShooter.shoot(1);
+			Robot.leftShooter.shoot(-1);
+			Robot.rightShooter.shoot(-1);
 			Robot.leftShooter.dashBoardControl();
 			Robot.rightShooter.dashBoardControl();
 	}
