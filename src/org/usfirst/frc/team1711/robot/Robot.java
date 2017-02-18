@@ -5,14 +5,11 @@ import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.vision.VisionThread;
 
-import org.usfirst.frc.team1711.robot.commands.DriveJoystickTest;
 import org.usfirst.frc.team1711.robot.commands.LaunchProjectile;
-import org.usfirst.frc.team1711.robot.commands.Oscillate;
 import org.usfirst.frc.team1711.robot.commands.RawJoystickDrive;
 import org.usfirst.frc.team1711.robot.commands.SpinAgitator;
 import org.usfirst.frc.team1711.robot.networking.PiNetworkTable;
@@ -37,14 +34,14 @@ public class Robot extends IterativeRobot {
 	public static Shooter leftShooter;
 	public static Shooter rightShooter;
 	VisionThread visionThread;
-	public static Agitator agitator;
+	public static Agitator leftAgitator;
+	public static Agitator rightAgitator;
 	public static Intake intake;
 	public static Lift lift;
 	public static PiNetworkTable piNet;
 	
 	Command autonomousCommand;
 	Command teleopDrive;
-	Command testingGroup;
 	Command launchProjectile;
 	Command oscillator;
 	SendableChooser<Command> chooser = new SendableChooser<>();
@@ -62,11 +59,10 @@ public class Robot extends IterativeRobot {
 		lift = new Lift();
 		intake = new Intake();
 		teleopDrive = new RawJoystickDrive();
-		testingGroup = new DriveJoystickTest();
-		agitator = new Agitator();
+		leftAgitator = new Agitator();
+		rightAgitator = new Agitator();
 		launchProjectile = new LaunchProjectile();
 		piNet = new PiNetworkTable();
-		oscillator = new Oscillate();
 		oi = new OI(); //this line needs to be last
 		
 		chooser.addDefault("Default Auto", new RawJoystickDrive());
@@ -84,7 +80,6 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void disabledInit() {
 		teleopDrive.cancel();
-		testingGroup.cancel();
 	}
 
 	@Override
@@ -146,9 +141,9 @@ public class Robot extends IterativeRobot {
 		Scheduler.getInstance().run();
 		leftShooter.dashBoardControl();
 		rightShooter.dashBoardControl();
-//		System.out.print("P");
-//		System.out.print(shooter.getPIDController().getP());
-		System.out.println(driveSystem.getGyroAngle());
+//		System.out.println(driveSystem.getGyroAngle());
+		System.out.println("Right shooter axis");
+		System.out.println(RobotMap.driverController.getRawAxis(3));
 	}
 
 	/**

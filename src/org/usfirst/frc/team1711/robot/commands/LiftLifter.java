@@ -1,5 +1,6 @@
 package org.usfirst.frc.team1711.robot.commands;
 
+import org.usfirst.frc.team1711.robot.MagicNumbers;
 import org.usfirst.frc.team1711.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -22,7 +23,7 @@ public class LiftLifter extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	if(Robot.lift.getLimitSwitch() == false)
-    		Robot.lift.runLift(.66654556);
+    		Robot.lift.runLift(MagicNumbers.liftSpeed);
     }
 
     // Make this return true when this Command no longer needs to run execute()

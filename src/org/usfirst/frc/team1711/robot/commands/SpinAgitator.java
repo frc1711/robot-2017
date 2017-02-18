@@ -1,18 +1,18 @@
 package org.usfirst.frc.team1711.robot.commands;
 
+import org.usfirst.frc.team1711.robot.MagicNumbers;
 import org.usfirst.frc.team1711.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 public class SpinAgitator extends Command
 {
-	double speed;
 	
-	public SpinAgitator(double speed)
+	public SpinAgitator()
 	{
-		requires(Robot.agitator);
-		this.speed = speed;
-		setTimeout(1);
+		requires(Robot.leftAgitator);
+		requires(Robot.rightAgitator);
+//		setTimeout(1);
 	}
 	
 	protected void initialize()
@@ -21,17 +21,20 @@ public class SpinAgitator extends Command
 	
 	protected void execute()
 	{ 
-		Robot.agitator.agitate(speed);
+		Robot.leftAgitator.agitate(MagicNumbers.agitatorSpeed);
+		Robot.rightAgitator.agitate(MagicNumbers.agitatorSpeed);
 	}
 	@Override
 	protected boolean isFinished() {
 		// TODO Auto-generated method stub
-		return isTimedOut();
+//		return isTimedOut();
+		return false;
 	}
 	
 	protected void end()
 	{
-		Robot.agitator.agitate(0);
+		Robot.leftAgitator.agitate(0);
+		Robot.rightAgitator.agitate(0);
 	}
 
 	@Override

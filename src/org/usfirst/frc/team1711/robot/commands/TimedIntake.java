@@ -1,5 +1,6 @@
 package org.usfirst.frc.team1711.robot.commands;
 
+import org.usfirst.frc.team1711.robot.MagicNumbers;
 import org.usfirst.frc.team1711.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.TimedCommand;
@@ -22,7 +23,7 @@ public class TimedIntake extends TimedCommand {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.intake.absorb(.5);
+    	Robot.intake.absorb(MagicNumbers.intakeSpeed);
     }
 
     // Called once after timeout

@@ -1,7 +1,9 @@
 package org.usfirst.frc.team1711.robot.commands;
 
+import org.usfirst.frc.team1711.robot.MagicNumbers;
 import org.usfirst.frc.team1711.robot.OI;
 import org.usfirst.frc.team1711.robot.Robot;
+import org.usfirst.frc.team1711.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -21,8 +23,8 @@ public class LaunchProjectile extends Command
 	protected void execute()
 	{
 			//shoot real quick
-			Robot.leftShooter.shoot(-1);
-			Robot.rightShooter.shoot(-1);
+			Robot.leftShooter.shoot(RobotMap.driverController.getRawAxis(2));
+			Robot.rightShooter.shoot(RobotMap.driverController.getRawAxis(3));
 			Robot.leftShooter.dashBoardControl();
 			Robot.rightShooter.dashBoardControl();
 	}
