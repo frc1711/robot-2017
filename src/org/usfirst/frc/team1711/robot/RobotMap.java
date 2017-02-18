@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.SerialPort;
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -28,6 +29,9 @@ public class RobotMap {
 	
 	//Joysticks
 	public static Joystick driverController;
+	
+	//Serial Ports
+	public static SerialPort encoderUSB;
 	
 	//Sensors
 	public static AnalogGyro gyro;

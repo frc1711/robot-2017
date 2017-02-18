@@ -5,6 +5,7 @@ import com.ctre.CANTalon;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Preferences;
+import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -16,6 +17,7 @@ public class Shooter extends PIDSubsystem
 {	
 	CANTalon shooterMotor;
 	Encoder shooterEncoder =  RobotMap.shooterEncoder;
+	SerialPort encoderUSB = RobotMap.encoderUSB;
 	static Preferences prefs;
 	public static double p = 0.0; 
 	public static double i = 1.0; 
@@ -38,7 +40,12 @@ public class Shooter extends PIDSubsystem
 	{
 		shooterMotor.pidWrite(output);
 	}
-	public void dashBoardControl(){
+	public void getUSB()
+	{
+		
+	}
+	public void dashBoardControl()
+	{
 		p = Preferences.getInstance().getDouble("P",0.0);
 		i = Preferences.getInstance().getDouble("I",1.0);
 		d = Preferences.getInstance().getDouble("D",0.0);
