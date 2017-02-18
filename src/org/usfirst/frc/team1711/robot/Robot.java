@@ -1,5 +1,6 @@
 package org.usfirst.frc.team1711.robot;
 
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.Command;
@@ -70,6 +71,7 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putData("Auto mode", chooser); 
 		
 		driveSystem.resetGyro();
+		CameraServer.getInstance().startAutomaticCapture();
 	}
 
 	/**
