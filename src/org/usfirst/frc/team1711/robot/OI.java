@@ -2,7 +2,10 @@ package org.usfirst.frc.team1711.robot;
 
 import org.usfirst.frc.team1711.robot.commands.Absorb;
 import org.usfirst.frc.team1711.robot.commands.LaunchProjectile;
-import org.usfirst.frc.team1711.robot.commands.SpinAgitator;
+import org.usfirst.frc.team1711.robot.commands.LiftLifter;
+import org.usfirst.frc.team1711.robot.commands.SpinAgitators;
+import org.usfirst.frc.team1711.robot.commands.SpinLeftAgitator;
+import org.usfirst.frc.team1711.robot.commands.SpinRightAgitator;
 
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -41,12 +44,18 @@ public class OI {
 	// until it is finished as determined by it's isFinished method.
 	// button.whenReleased(new ExampleCommand());
 	Button intakeButton = new JoystickButton(RobotMap.driverController, 1);
-	Button agitatorButton = new JoystickButton(RobotMap.driverController, 2);
+	Button doubleAgitatorButton = new JoystickButton(RobotMap.driverController, 2);
 	Button liftButton = new JoystickButton(RobotMap.driverController, 4);
+	Button leftAgitatorButton = new JoystickButton(RobotMap.driverController, 5);
+	Button rightAgitatorButton = new JoystickButton(RobotMap.driverController, 6);
 	
 	public OI()
 	{
-		agitatorButton.whileHeld(new SpinAgitator());
+		doubleAgitatorButton.whileHeld(new SpinAgitators());
+		leftAgitatorButton.whileHeld(new SpinLeftAgitator());
+		rightAgitatorButton.whileHeld(new SpinRightAgitator());
+		
+		liftButton.whenPressed(new LiftLifter());
 		intakeButton.whileHeld(new Absorb());
 	}
 }
