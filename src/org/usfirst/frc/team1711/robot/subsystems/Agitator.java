@@ -11,9 +11,9 @@ public class Agitator extends Subsystem
 {
 	CANTalon agitatorMotor;
 	
-	public Agitator()
+	public Agitator(CANTalon agitatorMotor)
 	{
-		agitatorMotor = RobotMap.agitatorMotor;
+		this.agitatorMotor = agitatorMotor;
 	}
 	public void agitate(double speed)
 	{

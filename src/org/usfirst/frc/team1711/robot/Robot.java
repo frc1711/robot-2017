@@ -60,8 +60,8 @@ public class Robot extends IterativeRobot {
 		lift = new Lift();
 		intake = new Intake();
 		teleopDrive = new RawJoystickDrive();
-		leftAgitator = new Agitator();
-		rightAgitator = new Agitator();
+		leftAgitator = new Agitator(RobotMap.leftAgitatorMotor);
+		rightAgitator = new Agitator(RobotMap.rightAgitatorMotor);
 		launchProjectile = new LaunchProjectile();
 		piNet = new PiNetworkTable();
 		oi = new OI(); //this line needs to be last
