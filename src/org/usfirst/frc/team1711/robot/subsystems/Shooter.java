@@ -15,7 +15,7 @@ import com.ctre.CANTalon;
 public class Shooter extends PIDSubsystem
 {	
 	CANTalon shooterMotor;
-//	Encoder shooterEncoder =  RobotMap.shooterEncoder;
+	Encoder shooterEncoder =  RobotMap.shooterEncoder;
 	static Preferences prefs;
 	public static double p = 0.0; 
 	public static double i = 1.0; 
@@ -26,13 +26,13 @@ public class Shooter extends PIDSubsystem
 		super("Shooter", Preferences.getInstance().getDouble("P", 0.0), Preferences.getInstance().getDouble("I", 0.0), Preferences.getInstance().getDouble("D", 0.0));
 		this.shooterMotor = shooterMotor;
 		//construct that shooter
-		//setAbsoluteTolerance(.2);
+		setAbsoluteTolerance(.2);
 		getPIDController().setContinuous(false);
 		
 	}
 	protected double returnPIDInput()
 	{
-		return  5;//shooterEncoder.getRate();
+		return shooterEncoder.getRate();
 	} 
 	protected void usePIDOutput(double output)
 	{

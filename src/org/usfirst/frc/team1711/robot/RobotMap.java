@@ -34,6 +34,7 @@ public class RobotMap {
 	public static DigitalInput liftSwitch;
 	public static Encoder leftDriveEncoder;
 	public static Encoder rightDriveEncoder;
+	public static Encoder shooterEncoder;
 	
 	public static void init()
 	{
@@ -57,6 +58,7 @@ public class RobotMap {
 		
 		//Digital port assignments
 		liftSwitch = new DigitalInput(0);
+		shooterEncoder = new Encoder(4, 5, false, Encoder.EncodingType.k4X);
 //		leftDriveEncoder = new Encoder(0, 1, false, Encoder.EncodingType.k4X);
 //		rightDriveEncoder = new Encoder(2, 3, false, Encoder.EncodingType.k4X);
 	}
