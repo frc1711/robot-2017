@@ -2,6 +2,7 @@ package org.usfirst.frc.team1711.robot.commands;
 
 import org.usfirst.frc.team1711.robot.MagicNumbers;
 import org.usfirst.frc.team1711.robot.Robot;
+import org.usfirst.frc.team1711.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.TimedCommand;
 
@@ -27,8 +28,8 @@ public class TimedShoot extends TimedCommand {
     protected void execute()
     {
     	
-    	Robot.leftShooter.shoot(MagicNumbers.shooterSpeed);
-    	Robot.rightShooter.shoot(MagicNumbers.shooterSpeed);
+    	Robot.leftShooter.shoot(RobotMap.driverController.getRawAxis(2));
+    	Robot.rightShooter.shoot(RobotMap.driverController.getRawAxis(3));
     }
 
     // Called once after timeout

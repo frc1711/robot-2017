@@ -12,7 +12,8 @@ public class HaltAgitator extends Command {
     public HaltAgitator() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.agitator);
+    	requires(Robot.leftAgitator);
+    	requires(Robot.rightAgitator);
     }
 
     // Called just before this Command runs the first time
@@ -22,7 +23,8 @@ public class HaltAgitator extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute()
     {
-    Robot.agitator.stopAgitator();
+    	Robot.leftAgitator.stopAgitator();
+    	Robot.rightAgitator.stopAgitator();
     }
 
     // Make this return true when this Command no longer needs to run execute()
