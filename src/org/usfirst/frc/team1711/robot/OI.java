@@ -41,7 +41,8 @@ public class OI {
 	// until it is finished as determined by it's isFinished method.
 	// button.whenReleased(new ExampleCommand());
 	Button intakeButton = new JoystickButton(RobotMap.driverController, 1);
-	Button agitatorButton = new JoystickButton(RobotMap.driverController, 0);
+	Button agitatorButton = new JoystickButton(RobotMap.driverController, 2);
+	Button liftButton = new JoystickButton(RobotMap.driverController, 4);
 	
 	public OI()
 	{
