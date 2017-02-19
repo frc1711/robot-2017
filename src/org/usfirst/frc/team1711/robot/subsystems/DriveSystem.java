@@ -10,6 +10,11 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
+/**
+ * This class defines the drive system object
+ * @author Abigail
+ *
+ */
 public class DriveSystem extends Subsystem
 {
 	//Motor controllers
@@ -28,6 +33,9 @@ public class DriveSystem extends Subsystem
 	//thanks jack for the weird coding terms
 	private double gero;
 	
+	/**
+	 * Creates a drive system with four CANTalon objects
+	 */
 	public DriveSystem()
 	{
 		leftFrontDrive = RobotMap.frontLeftDriveCANTalon;
@@ -47,6 +55,9 @@ public class DriveSystem extends Subsystem
 		gyro = RobotMap.gyro;
 	}
 	
+	/**
+	 * Sets the power of all four drive motors to zero
+	 */
 	public void stopMotors()
 	{
 		leftFrontDrive.set(0);
@@ -55,11 +66,19 @@ public class DriveSystem extends Subsystem
 		rightRearDrive.set(0);
 	}
 	
+	/**
+	 * Controls basic arcade driving, using WPIlib methods
+	 * @param stick
+	 */
 	public void arcadeDrive(Joystick stick)
 	{
 		drive.arcadeDrive(stick);
 	}
 	
+	/**
+	 * Drives the robot forward at the specified speed
+	 * @param speed
+	 */
 	public void driveForward(double speed)
 	{
 		leftFrontDrive.set(speed);
@@ -68,6 +87,10 @@ public class DriveSystem extends Subsystem
 		rightRearDrive.set(speed);
 	}
 	
+	/**
+	 * Turns the robot left at the specified speed
+	 * @param speed
+	 */
 	public void turnLeft(double speed)
 	{
 		leftFrontDrive.set(-speed);
@@ -76,6 +99,10 @@ public class DriveSystem extends Subsystem
 		rightRearDrive.set(speed);
 	}
 	
+	/**
+	 * Turns the robot right at the specified speed
+	 * @param speed
+	 */
 	public void turnRight(double speed)
 	{
 		leftFrontDrive.set(speed);
@@ -84,27 +111,46 @@ public class DriveSystem extends Subsystem
 		rightRearDrive.set(-speed);
 	}
 	
+	/**
+	 * Sets the current gyro heading to be the zero point
+	 */
 	public void resetGyro()
 	{
 		gero = gyro.getAngle();
 	}
 	
+	/**
+	 * Gets the current rate of the gyro
+	 * @return The rate, in degrees per second
+	 */
 	public double getGyroRate()
 	{
 		return gyro.getRate();
 	}
 	
+	/**
+	 * Gets the relative gyro angle
+	 * @return The current gyro angle minus the zero angle set at the last reset
+	 */
 	public double getGyroAngle()
 	{
 		return gyro.getAngle() - gero;
 	}
 	
+	/**
+	 * Gets the absolute gyro angle
+	 * @return The absolute angle of the gyro, in degrees
+	 */
 	public double getAbsGyroAngle()
 	{
 		//does not account for zeroing
 		return gyro.getAngle();
 	}
 	
+	/**
+	 * Gets the current position of the drive encoder
+	 * @return The current position of the drive encoder
+	 */
 	public double getDriveEncoder()
 	{
 		return leftRearDrive.getEncPosition();

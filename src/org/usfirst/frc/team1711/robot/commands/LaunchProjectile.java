@@ -7,9 +7,18 @@ import org.usfirst.frc.team1711.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 
+/**
+ * This class controls shooting for both shooters.
+ * @author Joe
+ *
+ */
 public class LaunchProjectile extends Command
 {
 	 
+	/**
+	 * Declares the subsystem dependencies for this command
+	 * This command requires both the left and right shooter
+	 */
 	public LaunchProjectile()
 	{
 		requires(Robot.leftShooter);
@@ -20,6 +29,9 @@ public class LaunchProjectile extends Command
 	{
 	}
 	
+	/**
+	 * Runs both the left and right shooter at variable power levels determined by the trigger axes on the Xbox controller
+	 */
 	protected void execute()
 	{
 			//shoot real quick
@@ -32,12 +44,18 @@ public class LaunchProjectile extends Command
 		return false;
 	}
 	
+	/**
+	 * Sets the power for both shooters to zero
+	 */
 	protected void end()
 	{
 		Robot.leftShooter.shoot(0);
 		Robot.rightShooter.shoot(0);
 	}
 
+	/**
+	 * Sets the power for both shooters to zero
+	 */
 	@Override
 	protected void interrupted() {
 		// TODO Auto-generated method stub
