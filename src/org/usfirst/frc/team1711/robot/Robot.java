@@ -19,6 +19,7 @@ import org.usfirst.frc.team1711.robot.subsystems.Intake;
 import org.usfirst.frc.team1711.robot.subsystems.Lift;
 import org.usfirst.frc.team1711.robot.subsystems.Shooter;
 import org.usfirst.frc.team1711.robot.subsystems.ShooterEncoder;
+import org.usfirst.frc.team1711.robot.commands.DashboardInput;
 
 // serial port test
 import edu.wpi.first.wpilibj.SerialPort;
@@ -45,6 +46,7 @@ public class Robot extends IterativeRobot {
 	public static Lift lift;
 	public static PiNetworkTable piNet;
 	public static ShooterEncoder shooterEncoder;
+	public static MagicNumbers magic;
 	
 	Command autonomousCommand;
 	Command teleopDrive;
@@ -69,7 +71,9 @@ public class Robot extends IterativeRobot {
 		leftAgitator = new Agitator(RobotMap.leftAgitatorMotor);
 		rightAgitator = new Agitator(RobotMap.rightAgitatorMotor);
 		launchProjectile = new LaunchProjectile();
+		magic = new MagicNumbers();
 		piNet = new PiNetworkTable();
+		dashboardInput = new DashboardInput();
 		oi = new OI(); //this line needs to be last
 			
 		chooser.addDefault("Default Auto", new RawJoystickDrive());
@@ -96,7 +100,7 @@ public class Robot extends IterativeRobot {
 	}
 
 	/**
-	 * This autonomous (along with the chooser code      above) shows how to select
+	 * This autonomous (along with the chooser code above) shows how to select
 	 * between different autonomous modes using the dashboard. The sendable
 	 * chooser code works with the Java SmartDashboard. If you prefer the
 	 * LabVIEW Dashboard, remove all of the chooser code and uncomment the
@@ -149,9 +153,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-//		leftShooter.dashBoardControl();
-//		rightShooter.dashBoardControl();
-		System.out.println(RobotMap.driverController.getRawButton(1));
+		System.out.println(driveSystem.getLeftEncoder());
 	}
 
 	/**

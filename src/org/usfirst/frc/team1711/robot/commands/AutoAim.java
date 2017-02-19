@@ -11,7 +11,7 @@ import org.usfirst.frc.team1711.robot.networking.*;
 public class AutoAim extends Command {
 
 	public boolean isDone = false;
-	public double sweetSpot = 0;
+	public double sweetSpot = 0; //optimal distance from the target when shooting
 	
     public AutoAim() {
         // Use requires() here to declare subsystem dependencies
@@ -24,18 +24,19 @@ public class AutoAim extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	while(Robot.piNet.getDistance() < sweetSpot)
+    	
+    	if(Robot.piNet.getDistance() < sweetSpot)
     	{
     		Robot.driveSystem.driveForward(.5);
     	}
     	
-    	while(Robot.piNet.getAngleDifference() < 0)
+    	if(Robot.piNet.getAngleDifference() < 0)
     	{
     		Robot.driveSystem.turnLeft(.25);
     	}
     	isDone = true;
     	
-    	while(Robot.piNet.getAngleDifference() > 0)
+    	if(Robot.piNet.getAngleDifference() > 0)
     	{
     		Robot.driveSystem.turnRight(.25);
     	}
