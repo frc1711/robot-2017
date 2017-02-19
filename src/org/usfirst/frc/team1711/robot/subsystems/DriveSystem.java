@@ -18,8 +18,7 @@ public class DriveSystem extends Subsystem
 	CANTalon leftRearDrive;
 	CANTalon rightRearDrive;
 	
-	private double leftEncoder = 0;
-	private double rightEncoder = 0;
+	private double driveEncoder = 0;
 	
 	RobotDrive drive;
 	
@@ -41,8 +40,7 @@ public class DriveSystem extends Subsystem
 		rightRearDrive.setInverted(true);
 		
 		//figure out which talons these are actually plugged into, should be one on each side
-		leftFrontDrive.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
-		rightFrontDrive.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
+		leftRearDrive.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
 		
 		drive = new RobotDrive(leftFrontDrive, leftRearDrive, rightFrontDrive, rightRearDrive);
 		
@@ -107,14 +105,9 @@ public class DriveSystem extends Subsystem
 		return gyro.getAngle();
 	}
 	
-	public double getLeftEncoder()
+	public double getDriveEncoder()
 	{
-		return leftFrontDrive.getEncPosition();
-	}
-	
-	public double getRightEncoder()
-	{
-		return rightFrontDrive.getEncPosition();
+		return leftRearDrive.getEncPosition();
 	}
 
 	@Override
