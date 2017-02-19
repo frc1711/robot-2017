@@ -55,7 +55,7 @@ public class OI {
 		leftAgitatorButton.whileHeld(new SpinLeftAgitator());
 		rightAgitatorButton.whileHeld(new SpinRightAgitator());
 		
-		liftButton.whenPressed(new LiftLifter());
+		liftButton.whileHeld(new LiftLifter());
 		intakeButton.whileHeld(new Absorb());
 	}
 }

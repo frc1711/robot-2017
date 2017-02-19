@@ -22,14 +22,14 @@ public class LiftLifter extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(Robot.lift.getLimitSwitch() == false)
-    		Robot.lift.runLift(MagicNumbers.liftSpeed);
+//    	if(Robot.lift.getLimitSwitch() == false)
+    		Robot.lift.runLift(0.75);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	if(Robot.lift.getLimitSwitch())
-        	return true;
+//    	if(Robot.lift.getLimitSwitch())
+//       	return true;
         return false;
     }
 
@@ -41,5 +41,6 @@ public class LiftLifter extends Command {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	Robot.lift.runLift(0);
     }
 }

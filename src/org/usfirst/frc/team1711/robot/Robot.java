@@ -70,7 +70,7 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putData("Auto mode", chooser); 
 		
 		driveSystem.resetGyro();
-		CameraServer.getInstance().startAutomaticCapture();
+//		CameraServer.getInstance().startAutomaticCapture();
 	}
 
 	/**
@@ -132,6 +132,7 @@ public class Robot extends IterativeRobot {
 		if (autonomousCommand != null)
 			autonomousCommand.cancel();
 		teleopDrive.start();
+		launchProjectile.start();
 	}
 
 	/**
@@ -140,9 +141,9 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-		leftShooter.dashBoardControl();
-		rightShooter.dashBoardControl();
-//		System.out.println(driveSystem.getGyroAngle());
+//		leftShooter.dashBoardControl();
+//		rightShooter.dashBoardControl();
+		System.out.println(RobotMap.driverController.getRawButton(1));
 	}
 
 	/**

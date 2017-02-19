@@ -32,9 +32,13 @@ public class DriveSystem extends Subsystem
 	public DriveSystem()
 	{
 		leftFrontDrive = RobotMap.frontLeftDriveCANTalon;
+		leftFrontDrive.setInverted(true);
 		rightFrontDrive = RobotMap.frontRightDriveCANTalon;
+		rightFrontDrive.setInverted(true);
 		leftRearDrive = RobotMap.rearLeftDriveCANTalon;
+		leftRearDrive.setInverted(true);
 		rightRearDrive = RobotMap.rearRightDriveCANTalon;
+		rightRearDrive.setInverted(true);
 		
 //		leftDriveEncoder = RobotMap.leftDriveEncoder;
 //		rightDriveEncoder = RobotMap.rightDriveEncoder;
