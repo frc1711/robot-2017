@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.SerialPort;
+import edu.wpi.first.wpilibj.SerialPort.Port;
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -31,15 +32,14 @@ public class RobotMap {
 	//Joysticks
 	public static Joystick driverController;
 	
-	//Serial Ports
-	public static SerialPort encoderUSB;
+	//Serial Ports (used for shooter encoder output)
+	public static SerialPort serialPort;
 	
 	//Sensors
 	public static AnalogGyro gyro;
 	public static DigitalInput liftSwitch;
 	public static Encoder leftDriveEncoder;
 	public static Encoder rightDriveEncoder;
-	public static Encoder shooterEncoder;
 	
 	public static void init()
 	{
@@ -67,5 +67,9 @@ public class RobotMap {
 //		shooterEncoder = new Encoder(4, 5, false, Encoder.EncodingType.k4X);
 //		leftDriveEncoder = new Encoder(0, 1, false, Encoder.EncodingType.k4X);
 //		rightDriveEncoder = new Encoder(2, 3, false, Encoder.EncodingType.k4X);
+		
+		// Serial port assignments
+		serialPort=new SerialPort(57600,Port.kMXP);		// shooter encoder board (Arduino)
+		
 	}
 }

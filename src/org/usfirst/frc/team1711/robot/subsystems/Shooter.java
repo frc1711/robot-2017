@@ -16,8 +16,7 @@ import com.ctre.CANTalon;
 public class Shooter extends PIDSubsystem
 {	
 	CANTalon shooterMotor;
-	Encoder shooterEncoder =  RobotMap.shooterEncoder;
-	SerialPort encoderUSB = RobotMap.encoderUSB;
+//	Encoder shooterEncoder =  RobotMap.shooterEncoder;
 	static Preferences prefs;
 	public static double p = 0.0; 
 	public static double i = 1.0; 
@@ -34,7 +33,8 @@ public class Shooter extends PIDSubsystem
 	}
 	protected double returnPIDInput()
 	{
-		return shooterEncoder.getRate();
+//		return shooterEncoder.getRate();
+		return 0;
 	} 
 	protected void usePIDOutput(double output)
 	{
@@ -49,7 +49,7 @@ public class Shooter extends PIDSubsystem
 		p = Preferences.getInstance().getDouble("P",0.0);
 		i = Preferences.getInstance().getDouble("I",1.0);
 		d = Preferences.getInstance().getDouble("D",0.0);
-		SmartDashboard.putNumber("S_Encoder Rate",shooterEncoder.getRate());
+//		SmartDashboard.putNumber("S_Encoder Rate",shooterEncoder.getRate());
 		SmartDashboard.putNumber("P",getPIDController().getP());
 		SmartDashboard.putNumber("I",getPIDController().getI());
 		SmartDashboard.putNumber("D",getPIDController().getD());

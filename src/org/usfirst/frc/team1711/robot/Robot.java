@@ -18,6 +18,11 @@ import org.usfirst.frc.team1711.robot.subsystems.DriveSystem;
 import org.usfirst.frc.team1711.robot.subsystems.Intake;
 import org.usfirst.frc.team1711.robot.subsystems.Lift;
 import org.usfirst.frc.team1711.robot.subsystems.Shooter;
+import org.usfirst.frc.team1711.robot.subsystems.ShooterEncoder;
+
+// serial port test
+import edu.wpi.first.wpilibj.SerialPort;
+import edu.wpi.first.wpilibj.SerialPort.Port;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -39,6 +44,7 @@ public class Robot extends IterativeRobot {
 	public static Intake intake;
 	public static Lift lift;
 	public static PiNetworkTable piNet;
+	public static ShooterEncoder shooterEncoder;
 	
 	Command autonomousCommand;
 	Command teleopDrive;
@@ -56,6 +62,7 @@ public class Robot extends IterativeRobot {
 		driveSystem = new DriveSystem();
 		leftShooter = new Shooter(RobotMap.leftShooterMotor);
 		rightShooter = new Shooter(RobotMap.rightShooterMotor);
+		shooterEncoder = new ShooterEncoder();
 		lift = new Lift();
 		intake = new Intake();
 		teleopDrive = new RawJoystickDrive();
@@ -64,7 +71,7 @@ public class Robot extends IterativeRobot {
 		launchProjectile = new LaunchProjectile();
 		piNet = new PiNetworkTable();
 		oi = new OI(); //this line needs to be last
-		
+			
 		chooser.addDefault("Default Auto", new RawJoystickDrive());
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", chooser); 
