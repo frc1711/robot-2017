@@ -49,7 +49,7 @@ public class Robot extends IterativeRobot {
 	Command autonomousCommand;
 	Command teleopDrive;
 	Command launchProjectile;
-	Command oscillator;
+	Command dashboardInput;
 	SendableChooser<Command> chooser = new SendableChooser<>();
 
 	/**
@@ -140,6 +140,7 @@ public class Robot extends IterativeRobot {
 			autonomousCommand.cancel();
 		teleopDrive.start();
 		launchProjectile.start();
+		dashboardInput.start();
 	}
 
 	/**

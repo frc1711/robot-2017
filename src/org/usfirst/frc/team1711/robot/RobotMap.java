@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.SerialPort.Port;
 
@@ -17,7 +18,7 @@ import edu.wpi.first.wpilibj.SerialPort.Port;
  */
 public class RobotMap {
 	
-	//Motor control lers
+	//Motor controllers
 	public static CANTalon frontLeftDriveCANTalon;
 	public static CANTalon frontRightDriveCANTalon;
 	public static CANTalon rearLeftDriveCANTalon;
@@ -40,6 +41,11 @@ public class RobotMap {
 	public static DigitalInput liftSwitch;
 	public static Encoder leftDriveEncoder;
 	public static Encoder rightDriveEncoder;
+	
+	//PDP
+	public static int leftShooterPDP;
+	public static int rightShooterPDP;
+	public static PowerDistributionPanel pdp;
 	
 	public static void init()
 	{
@@ -67,6 +73,11 @@ public class RobotMap {
 //		shooterEncoder = new Encoder(4, 5, false, Encoder.EncodingType.k4X);
 //		leftDriveEncoder = new Encoder(0, 1, false, Encoder.EncodingType.k4X);
 //		rightDriveEncoder = new Encoder(2, 3, false, Encoder.EncodingType.k4X);
+		
+		//PDP
+		pdp = new PowerDistributionPanel();
+		leftShooterPDP = 2;
+		rightShooterPDP = 14;
 		
 		// Serial port assignments
 		serialPort=new SerialPort(57600,Port.kMXP);		// shooter encoder board (Arduino)
