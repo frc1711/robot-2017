@@ -19,7 +19,7 @@ import org.usfirst.frc.team1711.robot.subsystems.Intake;
 import org.usfirst.frc.team1711.robot.subsystems.Lift;
 import org.usfirst.frc.team1711.robot.subsystems.Shooter;
 import org.usfirst.frc.team1711.robot.subsystems.ShooterEncoder;
-import org.usfirst.frc.team1711.robot.commands.DashboardInput;
+import org.usfirst.frc.team1711.robot.commands.*;
 
 // serial port test
 import edu.wpi.first.wpilibj.SerialPort;
