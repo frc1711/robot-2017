@@ -81,8 +81,8 @@ public class DriveSystem extends Subsystem
 	 */
 	public void driveForward(double speed)
 	{
-		leftFrontDrive.set(speed);
-		leftRearDrive.set(speed);
+		leftFrontDrive.set(-speed);
+		leftRearDrive.set(-speed);
 		rightFrontDrive.set(speed);
 		rightRearDrive.set(speed);
 	}
@@ -153,7 +153,17 @@ public class DriveSystem extends Subsystem
 	 */
 	public double getDriveEncoder()
 	{
+		return (leftRearDrive.getEncPosition() - driveEncoder);
+	}
+	
+	public double getAbsoluteEncoder()
+	{
 		return leftRearDrive.getEncPosition();
+	}
+	
+	public void zeroEncoder()
+	{
+		driveEncoder = leftRearDrive.getEncPosition();
 	}
 
 	@Override

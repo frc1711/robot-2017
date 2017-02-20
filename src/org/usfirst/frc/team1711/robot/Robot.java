@@ -74,6 +74,7 @@ public class Robot extends IterativeRobot {
 		magic = new MagicNumbers();
 		piNet = new PiNetworkTable();
 		dashboardInput = new DashboardInput();
+		autonomousCommand = new DriveDistance(12, 0.25);
 		oi = new OI(); //this line needs to be last
 			
 		chooser.addDefault("Default Auto", new RawJoystickDrive());
@@ -97,6 +98,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
+		System.out.println(driveSystem.getAbsoluteEncoder());
 	}
 
 	/**
@@ -112,7 +114,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		autonomousCommand = chooser.getSelected();
+//		autonomousCommand = chooser.getSelected();
 
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",
@@ -122,6 +124,7 @@ public class Robot extends IterativeRobot {
 		 */
 
 		// schedule the autonomous command (example)
+		driveSystem.zeroEncoder();
 		if (autonomousCommand != null)
 			autonomousCommand.start();
 	}
@@ -132,6 +135,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
+		System.out.println(driveSystem.getAbsoluteEncoder());
 	}
 
 	@Override
@@ -153,7 +157,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-		System.out.println(driveSystem.getDriveEncoder());
+		System.out.println(driveSystem.getGyroAngle());
 	}
 
 	/**

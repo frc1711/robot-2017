@@ -47,6 +47,9 @@ public class RobotMap {
 	public static int rightShooterPDP;
 	public static PowerDistributionPanel pdp;
 	
+	//Constants
+	public static final double distancePerPulse = 0.01910;
+	
 	public static void init()
 	{
 		driverController = new Joystick(0);
