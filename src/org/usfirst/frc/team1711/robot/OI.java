@@ -46,8 +46,8 @@ public class OI {
 	Button intakeButton = new JoystickButton(RobotMap.driverController, 1);
 	Button doubleAgitatorButton = new JoystickButton(RobotMap.driverController, 2);
 	Button liftButton = new JoystickButton(RobotMap.driverController, 4);
-	Button leftAgitatorButton = new JoystickButton(RobotMap.driverController, 5);
-	Button rightAgitatorButton = new JoystickButton(RobotMap.driverController, 6);
+	Button leftAgitatorButton = new JoystickButton(RobotMap.driverController, 6);
+	Button rightAgitatorButton = new JoystickButton(RobotMap.driverController, 5);
 	
 	public OI()
 	{
