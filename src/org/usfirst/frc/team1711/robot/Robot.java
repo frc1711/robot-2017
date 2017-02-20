@@ -81,7 +81,7 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putData("Auto mode", chooser); 
 		
 		driveSystem.resetGyro();
-		CameraServer.getInstance().startAutomaticCapture("usb cam", "/dev/video0");
+//		CameraServer.getInstance().startAutomaticCapture("usb cam", "/dev/video0");
 	}
 
 	/**
