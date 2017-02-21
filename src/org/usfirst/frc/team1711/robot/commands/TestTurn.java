@@ -23,7 +23,7 @@ public class TestTurn extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.driveSystem.turnLeft(.25);
+    	Robot.driveSystem.turnLeft(.35);
 //    	System.out.println(Robot.driveSystem.getGyroAngle());
     }
 

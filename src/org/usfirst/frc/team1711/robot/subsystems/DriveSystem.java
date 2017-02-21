@@ -97,8 +97,8 @@ public class DriveSystem extends Subsystem
 	 */
 	public void turnLeft(double speed)
 	{
-		leftFrontDrive.set(-speed);
-		leftRearDrive.set(-speed);
+		leftFrontDrive.set(speed);
+		leftRearDrive.set(speed);
 		rightFrontDrive.set(speed);
 		rightRearDrive.set(speed);
 	}
