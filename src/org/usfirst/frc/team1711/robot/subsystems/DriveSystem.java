@@ -3,6 +3,7 @@ package org.usfirst.frc.team1711.robot.subsystems;
 import org.usfirst.frc.team1711.robot.RobotMap;
 
 import com.ctre.CANTalon;
+import com.ctre.CANTalon.TalonControlMode;
 
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.Encoder;
@@ -33,17 +34,20 @@ public class DriveSystem extends Subsystem
 	//thanks jack for the weird coding terms
 	private double gero;
 	
+	boolean inSetPointMode = false;
+	double setPoint;
+	
 	/**
 	 * Creates a drive system with four CANTalon objects
 	 */
 	public DriveSystem()
 	{
 		leftFrontDrive = RobotMap.frontLeftDriveCANTalon;
-		leftFrontDrive.setInverted(true);
+		leftFrontDrive.setInverted(false);
 		rightFrontDrive = RobotMap.frontRightDriveCANTalon;
 		rightFrontDrive.setInverted(true);
 		leftRearDrive = RobotMap.rearLeftDriveCANTalon;
-		leftRearDrive.setInverted(true);
+		leftRearDrive.setInverted(false);
 		rightRearDrive = RobotMap.rearRightDriveCANTalon;
 		rightRearDrive.setInverted(true);
 		
@@ -81,8 +85,8 @@ public class DriveSystem extends Subsystem
 	 */
 	public void driveForward(double speed)
 	{
-		leftFrontDrive.set(-speed);
-		leftRearDrive.set(-speed);
+		leftFrontDrive.set(speed);
+		leftRearDrive.set(speed);
 		rightFrontDrive.set(speed);
 		rightRearDrive.set(speed);
 	}
@@ -159,6 +163,45 @@ public class DriveSystem extends Subsystem
 	public double getAbsoluteEncoder()
 	{
 		return leftRearDrive.getEncPosition();
+	}
+	
+	public void enablePositionMode()
+	{
+		leftRearDrive.changeControlMode(TalonControlMode.Position);
+		leftFrontDrive.changeControlMode(TalonControlMode.Follower);
+		rightFrontDrive.changeControlMode(TalonControlMode.Follower);
+		rightRearDrive.changeControlMode(TalonControlMode.Follower);
+		
+		leftFrontDrive.set(6);
+		rightFrontDrive.set(6);
+		rightRearDrive.set(6);
+		
+		inSetPointMode = true;
+	}
+	
+	public void disablePositionMode()
+	{
+		leftRearDrive.changeControlMode(TalonControlMode.Speed);
+		leftFrontDrive.changeControlMode(TalonControlMode.Speed);
+		rightFrontDrive.changeControlMode(TalonControlMode.Speed);
+		rightRearDrive.changeControlMode(TalonControlMode.Speed);
+		
+		inSetPointMode = false;
+	}
+	
+	public void setSetpoint(double setPoint)
+	{
+		this.setPoint = setPoint;
+		if(inSetPointMode == true)
+			leftRearDrive.set(this.setPoint);
+	}
+	
+	public boolean isAtSetPoint()
+	{
+		if((leftRearDrive.getEncPosition() * RobotMap.distancePerPulse) >= setPoint)
+			return true;
+		else
+			return false;
 	}
 	
 	public void zeroEncoder()

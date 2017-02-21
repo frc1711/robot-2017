@@ -52,6 +52,7 @@ public class Robot extends IterativeRobot {
 	Command teleopDrive;
 	Command launchProjectile;
 	Command dashboardInput;
+	Command currentMonitoring;
 	SendableChooser<Command> chooser = new SendableChooser<>();
 
 	/**
@@ -74,7 +75,8 @@ public class Robot extends IterativeRobot {
 		magic = new MagicNumbers();
 		piNet = new PiNetworkTable();
 		dashboardInput = new DashboardInput();
-		autonomousCommand = new DriveDistance(12, 0.25);
+		autonomousCommand = new DriveDistance(112, 0.25);
+		currentMonitoring = new CurrentMonitor();
 		oi = new OI(); //this line needs to be last
 			
 		chooser.addDefault("Default Auto", new RawJoystickDrive());
@@ -149,6 +151,7 @@ public class Robot extends IterativeRobot {
 		teleopDrive.start();
 		launchProjectile.start();
 		dashboardInput.start();
+		currentMonitoring.start();
 	}
 
 	/**

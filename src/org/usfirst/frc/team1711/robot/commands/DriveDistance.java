@@ -26,16 +26,13 @@ public class DriveDistance extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.driveSystem.driveForward(speed);
+    	Robot.driveSystem.setSetpoint(distance);
 
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        if((Robot.driveSystem.getDriveEncoder() * RobotMap.distancePerPulse) >= distance)
-        	return true;
-        else
-        	return false;
+        return Robot.driveSystem.isAtSetPoint();
     }
 
     // Called once after isFinished returns true
