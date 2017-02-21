@@ -75,7 +75,8 @@ public class Robot extends IterativeRobot {
 		magic = new MagicNumbers();
 		piNet = new PiNetworkTable();
 		dashboardInput = new DashboardInput();
-		autonomousCommand = new DriveDistance(112, 0.25);
+//		autonomousCommand = new DriveDistance(112, 0.25);
+		autonomousCommand = new TestTurn(-180);
 		currentMonitoring = new CurrentMonitor();
 		oi = new OI(); //this line needs to be last
 			
@@ -83,7 +84,6 @@ public class Robot extends IterativeRobot {
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", chooser); 
 		
-		driveSystem.resetGyro();
 //		CameraServer.getInstance().startAutomaticCapture("usb cam", "/dev/video0");
 	}
 
@@ -100,7 +100,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
-		System.out.println(driveSystem.getAbsoluteEncoder());
+		System.out.println(driveSystem.getGyroAngle());
 	}
 
 	/**
@@ -126,6 +126,8 @@ public class Robot extends IterativeRobot {
 		 */
 
 		// schedule the autonomous command (example)
+
+		driveSystem.resetGyro();
 		driveSystem.zeroEncoder();
 		if (autonomousCommand != null)
 			autonomousCommand.start();
@@ -137,7 +139,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
-		System.out.println(driveSystem.getAbsoluteEncoder());
+		System.out.println(driveSystem.getGyroAngle());
 	}
 
 	@Override

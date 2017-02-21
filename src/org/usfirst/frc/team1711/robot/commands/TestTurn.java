@@ -1,40 +1,35 @@
 package org.usfirst.frc.team1711.robot.commands;
 
 import org.usfirst.frc.team1711.robot.Robot;
-import org.usfirst.frc.team1711.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class DriveDistance extends Command {
+public class TestTurn extends Command {
 
-	public double distance;
-	public double speed;
+	double desiredAngle;
 	
-    public DriveDistance(double distance, double speed) {
+    public TestTurn(double desiredAngle) {
         requires(Robot.driveSystem);
-        this.distance = distance;
-        this.speed = speed;
-//        Robot.driveSystem.enablePositionMode();
-//        Robot.driveSystem.setSetpoint(distance);
+        this.desiredAngle = desiredAngle;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-//    	Robot.driveSystem.zeroEncoder();
+//    	Robot.driveSystem.resetGyro();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-//    	Robot.driveSystem.goToSetpoint();
-    	Robot.driveSystem.driveForward(speed);
+    	Robot.driveSystem.turnLeft(.25);
+//    	System.out.println(Robot.driveSystem.getGyroAngle());
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        if((Robot.driveSystem.getDriveEncoder() * RobotMap.distancePerPulse) >= distance)
+        if(Robot.driveSystem.getGyroAngle() <= desiredAngle)
         	return true;
         else
         	return false;
@@ -42,13 +37,10 @@ public class DriveDistance extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.driveSystem.stopMotors();
-    	Robot.driveSystem.disablePositionMode();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	Robot.driveSystem.stopMotors();
     }
 }

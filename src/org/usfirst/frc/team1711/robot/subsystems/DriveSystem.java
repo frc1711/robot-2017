@@ -43,11 +43,11 @@ public class DriveSystem extends Subsystem
 	public DriveSystem()
 	{
 		leftFrontDrive = RobotMap.frontLeftDriveCANTalon;
-		leftFrontDrive.setInverted(false);
+		leftFrontDrive.setInverted(true);
 		rightFrontDrive = RobotMap.frontRightDriveCANTalon;
 		rightFrontDrive.setInverted(true);
 		leftRearDrive = RobotMap.rearLeftDriveCANTalon;
-		leftRearDrive.setInverted(false);
+		leftRearDrive.setInverted(true);
 		rightRearDrive = RobotMap.rearRightDriveCANTalon;
 		rightRearDrive.setInverted(true);
 		
@@ -85,8 +85,8 @@ public class DriveSystem extends Subsystem
 	 */
 	public void driveForward(double speed)
 	{
-		leftFrontDrive.set(speed);
-		leftRearDrive.set(speed);
+		leftFrontDrive.set(-speed);
+		leftRearDrive.set(-speed);
 		rightFrontDrive.set(speed);
 		rightRearDrive.set(speed);
 	}
@@ -191,14 +191,18 @@ public class DriveSystem extends Subsystem
 	
 	public void setSetpoint(double setPoint)
 	{
-		this.setPoint = setPoint;
+		this.setPoint = setPoint / RobotMap.distancePerPulse;
+	}
+	
+	public void goToSetpoint()
+	{
 		if(inSetPointMode == true)
 			leftRearDrive.set(this.setPoint);
 	}
 	
 	public boolean isAtSetPoint()
 	{
-		if((leftRearDrive.getEncPosition() * RobotMap.distancePerPulse) >= setPoint)
+		if(getDriveEncoder() >= setPoint)
 			return true;
 		else
 			return false;
