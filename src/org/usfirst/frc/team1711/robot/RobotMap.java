@@ -50,6 +50,10 @@ public class RobotMap {
 	//Constants
 	public static final double distancePerPulse = 0.01910;
 	
+	//e-stop
+	public static boolean rightShooterSad;
+	public static boolean leftShooterSad;
+	
 	public static void init()
 	{
 		driverController = new Joystick(0);
@@ -85,5 +89,7 @@ public class RobotMap {
 		// Serial port assignments
 		serialPort=new SerialPort(57600,Port.kMXP);		// shooter encoder board (Arduino)
 		
+		rightShooterSad = false;
+		leftShooterSad = false;
 	}
 }

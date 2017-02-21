@@ -35,8 +35,14 @@ public class LaunchProjectile extends Command
 	protected void execute()
 	{
 			//shoot real quick
-			Robot.leftShooter.shoot(-1 *(RobotMap.driverController.getRawAxis(3)));
-			Robot.rightShooter.shoot((RobotMap.driverController.getRawAxis(2)));
+		if(RobotMap.leftShooterSad == false)
+			Robot.leftShooter.shoot((RobotMap.driverController.getRawAxis(3)));
+		else
+			Robot.leftShooter.shoot(0);
+		if(RobotMap.rightShooterSad == false)
+			Robot.rightShooter.shoot(-1 * (RobotMap.driverController.getRawAxis(2)));
+		else
+			Robot.leftShooter.shoot(0);
 	}
 	@Override
 	protected boolean isFinished() {
