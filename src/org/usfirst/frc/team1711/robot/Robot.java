@@ -75,8 +75,8 @@ public class Robot extends IterativeRobot {
 		magic = new MagicNumbers();
 		piNet = new PiNetworkTable();
 		dashboardInput = new DashboardInput();
-//		autonomousCommand = new DriveDistance(112, 0.25);
-		autonomousCommand = new TestTurn(-180);
+		autonomousCommand = new DriveDistance(40, 0.25);
+//		autonomousCommand = new TestTurn(-180);
 		currentMonitoring = new CurrentMonitor();
 		oi = new OI(); //this line needs to be last
 			

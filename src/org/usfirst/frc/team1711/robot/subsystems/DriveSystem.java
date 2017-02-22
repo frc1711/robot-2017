@@ -172,6 +172,10 @@ public class DriveSystem extends Subsystem
 		rightFrontDrive.changeControlMode(TalonControlMode.Follower);
 		rightRearDrive.changeControlMode(TalonControlMode.Follower);
 		
+//		leftRearDrive.reverseOutput(true);
+//		leftFrontDrive.reverseOutput(true);
+		
+		leftRearDrive.set(0);
 		leftFrontDrive.set(6);
 		rightFrontDrive.set(6);
 		rightRearDrive.set(6);
@@ -185,6 +189,14 @@ public class DriveSystem extends Subsystem
 		leftFrontDrive.changeControlMode(TalonControlMode.Speed);
 		rightFrontDrive.changeControlMode(TalonControlMode.Speed);
 		rightRearDrive.changeControlMode(TalonControlMode.Speed);
+		
+		leftRearDrive.set(0);
+		leftFrontDrive.set(0);
+		rightRearDrive.set(0);
+		rightFrontDrive.set(0);
+		
+		leftRearDrive.reverseOutput(false);
+		leftFrontDrive.reverseOutput(false);
 		
 		inSetPointMode = false;
 	}
