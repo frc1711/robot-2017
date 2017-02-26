@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.vision.VisionThread;
 
 import org.usfirst.frc.team1711.robot.commands.LaunchProjectile;
 import org.usfirst.frc.team1711.robot.commands.RawJoystickDrive;
+import org.usfirst.frc.team1711.robot.commands.auton.DoNothing;
 import org.usfirst.frc.team1711.robot.networking.PiNetworkTable;
 import org.usfirst.frc.team1711.robot.subsystems.Agitator;
 import org.usfirst.frc.team1711.robot.subsystems.DriveSystem;
@@ -75,13 +76,11 @@ public class Robot extends IterativeRobot {
 		magic = new MagicNumbers();
 		piNet = new PiNetworkTable();
 		dashboardInput = new DashboardInput();
-		autonomousCommand = new DriveDistance(112, 0.25);
-//		autonomousCommand = new TestTurn(-180);
 		currentMonitoring = new CurrentMonitor();
 		oi = new OI(); //this line needs to be last
 			
-		chooser.addDefault("Default Auto", new RawJoystickDrive());
-		// chooser.addObject("My Auto", new MyAutoCommand());
+		chooser.addDefault("Do Nothing", new DoNothing());
+		chooser.addObject("Cross baseline", new DriveDistance(112, 0.25));
 		SmartDashboard.putData("Auto mode", chooser); 
 		
 //		CameraServer.getInstance().startAutomaticCapture("usb cam", "/dev/video0");
@@ -116,16 +115,8 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-//		autonomousCommand = chooser.getSelected();
-
-		/*
-		 * String autoSelected = SmartDashboard.getString("Auto Selector",
-		 * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
-		 * = new MyAutoCommand(); break; case "Default Auto": default:
-		 * autonomousCommand = new ExampleCommand(); break; }
-		 */
-
-		// schedule the autonomous command (example)
+		
+		autonomousCommand = chooser.getSelected();
 
 		driveSystem.resetGyro();
 		driveSystem.zeroEncoder();
@@ -144,10 +135,7 @@ public class Robot extends IterativeRobot {
 
 	@Override
 	public void teleopInit() {
-		// This makes sure that the autonomous stops running when
-		// teleop starts running. If you want the autonomous to
-		// continue until interrupted by another command, remove
-		// this line or comment it out.
+		//stop auton when teleop starts (optional)
 		if (autonomousCommand != null)
 			autonomousCommand.cancel();
 		teleopDrive.start();
