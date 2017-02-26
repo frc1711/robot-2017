@@ -79,6 +79,11 @@ public class DriveSystem extends Subsystem
 		drive.arcadeDrive(stick);
 	}
 	
+	public void backwardsArcade()
+	{
+		drive.arcadeDrive(RobotMap.driverController.getRawAxis(1), (-1 * RobotMap.driverController.getRawAxis(0)));
+	}
+	
 	/**
 	 * Drives the robot forward at the specified speed
 	 * @param speed

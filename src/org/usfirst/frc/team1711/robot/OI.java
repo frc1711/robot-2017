@@ -1,8 +1,10 @@
 package org.usfirst.frc.team1711.robot;
 
 import org.usfirst.frc.team1711.robot.commands.Absorb;
+import org.usfirst.frc.team1711.robot.commands.JoystickDriveBackwards;
 import org.usfirst.frc.team1711.robot.commands.LaunchProjectile;
 import org.usfirst.frc.team1711.robot.commands.LiftLifter;
+import org.usfirst.frc.team1711.robot.commands.RawJoystickDrive;
 import org.usfirst.frc.team1711.robot.commands.SpinAgitators;
 import org.usfirst.frc.team1711.robot.commands.SpinLeftAgitator;
 import org.usfirst.frc.team1711.robot.commands.SpinRightAgitator;
@@ -15,6 +17,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
  */
+
 public class OI {
 	//// CREATING BUTTONS
 	// One type of button is a joystick button which is any button on a
@@ -48,6 +51,9 @@ public class OI {
 	Button liftButton = new JoystickButton(RobotMap.driverController, 4);
 	Button leftAgitatorButton = new JoystickButton(RobotMap.driverController, 6);
 	Button rightAgitatorButton = new JoystickButton(RobotMap.driverController, 5);
+	Button goBackwardsButton = new JoystickButton(RobotMap.driverController, 3);
+	
+	private boolean isBackwards = false;
 	
 	public OI()
 	{
@@ -57,5 +63,16 @@ public class OI {
 		
 		liftButton.whileHeld(new LiftLifter());
 		intakeButton.whileHeld(new Absorb());
+		
+		if(isBackwards)
+		{
+			goBackwardsButton.whenPressed(new RawJoystickDrive());
+			isBackwards = false;
+		}
+		else
+		{
+			goBackwardsButton.whenPressed(new JoystickDriveBackwards());
+			isBackwards = true;
+		}
 	}
 }

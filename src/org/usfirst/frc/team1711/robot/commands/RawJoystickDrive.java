@@ -57,4 +57,9 @@ public class RawJoystickDrive extends Command
 		Robot.driveSystem.stopMotors();
 	}
 	
+	protected void interrupted()
+	{
+		Robot.driveSystem.stopMotors();
+	}
+	
 }
