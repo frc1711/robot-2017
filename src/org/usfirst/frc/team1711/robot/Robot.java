@@ -83,7 +83,8 @@ public class Robot extends IterativeRobot {
 		chooser.addObject("Cross baseline", new DriveDistance(112, 0.25));
 		SmartDashboard.putData("Auto mode", chooser); 
 		
-//		CameraServer.getInstance().startAutomaticCapture("usb cam", "/dev/video0");
+		CameraServer.getInstance().startAutomaticCapture("usb cam", "/dev/video0");
+		CameraServer.getInstance().startAutomaticCapture("usb cam", "/dev/video1");
 	}
 
 	/**
