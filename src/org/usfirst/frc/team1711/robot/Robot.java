@@ -1,5 +1,8 @@
 package org.usfirst.frc.team1711.robot;
 
+import edu.wpi.cscore.CvSink;
+import edu.wpi.cscore.CvSource;
+import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Preferences;
@@ -20,6 +23,7 @@ import org.usfirst.frc.team1711.robot.subsystems.Intake;
 import org.usfirst.frc.team1711.robot.subsystems.Lift;
 import org.usfirst.frc.team1711.robot.subsystems.Shooter;
 import org.usfirst.frc.team1711.robot.subsystems.ShooterEncoder;
+import org.opencv.core.Mat;
 import org.usfirst.frc.team1711.robot.commands.*;
 
 // serial port test
@@ -55,6 +59,10 @@ public class Robot extends IterativeRobot {
 	Command dashboardInput;
 	Command currentMonitoring;
 	SendableChooser<Command> chooser = new SendableChooser<>();
+	
+	
+	boolean cameraCheck = false;
+	boolean isCamera1 = false;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -82,9 +90,10 @@ public class Robot extends IterativeRobot {
 		chooser.addDefault("Do Nothing", new DoNothing());
 		chooser.addObject("Cross baseline", new DriveDistance(112, 0.25));
 		SmartDashboard.putData("Auto mode", chooser); 
-		
+
 		CameraServer.getInstance().startAutomaticCapture("usb cam", "/dev/video1");
-		CameraServer.getInstance().startAutomaticCapture("usb cam", "/dev/video0");
+		CameraServer.getInstance().startAutomaticCapture("usb cam 2", "/dev/video0");
+		
 	}
 
 	/**
@@ -151,7 +160,24 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-		System.out.println(driveSystem.getGyroAngle());		
+		System.out.println(driveSystem.getGyroAngle());
+		
+/*		if(RobotMap.driverController.getRawButton(7))
+			isCamera1 = !(isCamera1);
+		
+		if(cameraCheck != isCamera1)
+		{
+			if(isCamera1)
+			{
+				CameraServer.getInstance().startAutomaticCapture("usb cam", "/dev/video0");
+				CameraServer.getInstance()
+			}
+			else
+				CameraServer.getInstance().startAutomaticCapture("usb cam", "/dev/video1");
+			cameraCheck = isCamera1;
+		}
+		else
+			cameraCheck = isCamera1; */
 	}
 
 	/**

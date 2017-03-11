@@ -52,10 +52,8 @@ public class OI {
 	Button leftAgitatorButton = new JoystickButton(RobotMap.driverController, 6);
 	Button rightAgitatorButton = new JoystickButton(RobotMap.driverController, 5);
 	Button goBackwardsButton = new JoystickButton(RobotMap.driverController, 3);
-	Button cameraSwitcher = new JoystickButton(RobotMap.driverController, 7);
 	
 	private boolean isBackwards = false;
-	public boolean whichCamera = false;
 	
 	public OI()
 	{
@@ -65,10 +63,6 @@ public class OI {
 		
 		liftButton.whileHeld(new LiftLifter());
 		intakeButton.whileHeld(new Absorb());
-		
-		boolean camera = cameraSwitcher.get();
-		if(camera)
-			whichCamera = !(whichCamera);
 		
 		if(isBackwards)
 		{
