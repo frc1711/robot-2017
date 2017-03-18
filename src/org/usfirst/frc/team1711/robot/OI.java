@@ -1,6 +1,7 @@
 package org.usfirst.frc.team1711.robot;
 
 import org.usfirst.frc.team1711.robot.commands.Absorb;
+import org.usfirst.frc.team1711.robot.commands.BackwardsIntake;
 import org.usfirst.frc.team1711.robot.commands.JoystickDriveBackwards;
 import org.usfirst.frc.team1711.robot.commands.LaunchProjectile;
 import org.usfirst.frc.team1711.robot.commands.LiftLifter;
@@ -51,7 +52,8 @@ public class OI {
 	Button liftButton = new JoystickButton(RobotMap.driverController, 4);
 	Button leftAgitatorButton = new JoystickButton(RobotMap.driverController, 6);
 	Button rightAgitatorButton = new JoystickButton(RobotMap.driverController, 5);
-	Button goBackwardsButton = new JoystickButton(RobotMap.driverController, 3);
+//	Button goBackwardsButton = new JoystickButton(RobotMap.driverController, 3);
+	Button backwardsIntakeButton = new JoystickButton(RobotMap.driverController, 7);
 	
 	private boolean isBackwards = false;
 	
@@ -63,8 +65,9 @@ public class OI {
 		
 		liftButton.whileHeld(new LiftLifter());
 		intakeButton.whileHeld(new Absorb());
+		backwardsIntakeButton.whileHeld(new BackwardsIntake());
 		
-		if(isBackwards)
+/*		if(isBackwards)
 		{
 			goBackwardsButton.whenPressed(new RawJoystickDrive());
 			isBackwards = false;
@@ -73,6 +76,6 @@ public class OI {
 		{
 			goBackwardsButton.whenPressed(new JoystickDriveBackwards());
 			isBackwards = true;
-		}
+		} */
 	}
 }

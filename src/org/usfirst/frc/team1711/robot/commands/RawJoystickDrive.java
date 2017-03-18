@@ -28,7 +28,7 @@ public class RawJoystickDrive extends Command
 	 */
 	protected void initialize()
 	{
-		Robot.driveSystem.resetGyro();
+//		Robot.driveSystem.resetGyro();
 	}
 	
 	/**
@@ -41,6 +41,8 @@ public class RawJoystickDrive extends Command
 		{
 			Robot.driveSystem.arcadeDrive(RobotMap.driverController);
 		}
+		else
+			Robot.driveSystem.stopMotors();
 	}
 
 	@Override

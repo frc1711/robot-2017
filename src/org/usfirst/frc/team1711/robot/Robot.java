@@ -39,18 +39,18 @@ import edu.wpi.first.wpilibj.SerialPort.Port;
  */
 public class Robot extends IterativeRobot {
 
-	Preferences prefs;
+//	Preferences prefs;
 	public static DriveSystem driveSystem;
 	public static OI oi;	
 	public static Shooter leftShooter;
 	public static Shooter rightShooter;
-	VisionThread visionThread;
+//	VisionThread visionThread;
 	public static Agitator leftAgitator;
 	public static Agitator rightAgitator;
 	public static Intake intake;
 	public static Lift lift;
-	public static PiNetworkTable piNet;
-	public static ShooterEncoder shooterEncoder;
+//	public static PiNetworkTable piNet;
+//	public static ShooterEncoder shooterEncoder;
 	public static MagicNumbers magic;
 	
 	Command autonomousCommand;
@@ -61,8 +61,8 @@ public class Robot extends IterativeRobot {
 	SendableChooser<Command> chooser = new SendableChooser<>();
 	
 	
-	boolean cameraCheck = false;
-	boolean isCamera1 = false;
+//	boolean cameraCheck = false;
+//	boolean isCamera1 = false;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -74,7 +74,7 @@ public class Robot extends IterativeRobot {
 		driveSystem = new DriveSystem();
 		leftShooter = new Shooter(RobotMap.leftShooterMotor);
 		rightShooter = new Shooter(RobotMap.rightShooterMotor);
-		shooterEncoder = new ShooterEncoder();
+//		shooterEncoder = new ShooterEncoder();
 		lift = new Lift();
 		intake = new Intake();
 		teleopDrive = new RawJoystickDrive();
@@ -82,18 +82,22 @@ public class Robot extends IterativeRobot {
 		rightAgitator = new Agitator(RobotMap.rightAgitatorMotor);
 		launchProjectile = new LaunchProjectile();
 		magic = new MagicNumbers();
-		piNet = new PiNetworkTable();
+//		piNet = new PiNetworkTable();
 		dashboardInput = new DashboardInput();
 		currentMonitoring = new CurrentMonitor();
 		oi = new OI(); //this line needs to be last
 			
 		chooser.addDefault("Do Nothing", new DoNothing());
-		chooser.addObject("Cross baseline", new DriveDistance(112, 0.25));
+		chooser.addObject("Cross baseline", new DriveDistance(200, 0.25));
+		chooser.addObject("Straight Gear", new DriveDistance(68, 0.25));
+		chooser.addObject("Side gear", new SideGearAuton());
+		chooser.addObject("Side gear and shoot", new SideGearAndShoot());
 		SmartDashboard.putData("Auto mode", chooser); 
+//		autonomousCommand = new DriveDistance(150, 0.25);
 
-		CameraServer.getInstance().startAutomaticCapture("usb cam", "/dev/video1");
-		CameraServer.getInstance().startAutomaticCapture("usb cam 2", "/dev/video0");
-		
+//		CameraServer.getInstance().startAutomaticCapture("usb cam", "/dev/video1");
+//		CameraServer.getInstance().startAutomaticCapture("usb cam 2", "/dev/video0");
+		CameraServer.getInstance().startAutomaticCapture();
 	}
 
 	/**
@@ -109,7 +113,6 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
-		System.out.println(driveSystem.getDriveEncoder());
 	}
 
 	/**
@@ -128,7 +131,7 @@ public class Robot extends IterativeRobot {
 		
 		autonomousCommand = chooser.getSelected();
 
-		driveSystem.resetGyro();
+	//	driveSystem.resetGyro();
 		driveSystem.zeroEncoder();
 		if (autonomousCommand != null)
 			autonomousCommand.start();
@@ -140,7 +143,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
-		System.out.println(driveSystem.getDriveEncoder());
+//		System.out.println(driveSystem.getGyroAngle());
 	}
 
 	@Override
@@ -160,8 +163,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-		System.out.println(driveSystem.getGyroAngle());
-		
+//		System.out.println(driveSystem.getGyroAngle());
 /*		if(RobotMap.driverController.getRawButton(7))
 			isCamera1 = !(isCamera1);
 		

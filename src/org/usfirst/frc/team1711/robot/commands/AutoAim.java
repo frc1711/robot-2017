@@ -32,7 +32,7 @@ public class AutoAim extends Command {
      */
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	
+ /*   	
     	if(Robot.piNet.getDistance() < sweetSpot)
     	{
     		Robot.driveSystem.driveForward(.5);
@@ -48,7 +48,7 @@ public class AutoAim extends Command {
     	{
     		Robot.driveSystem.turnRight(.25);
     	}
-    	isDone = true;
+    	isDone = true; */
     }
     
     /**

@@ -73,7 +73,7 @@ public class RobotMap {
 		rightShooterMotor = new CANTalon(8);
 		
 		//Analog port assignments
-		gyro = new AnalogGyro(1);
+		gyro = new AnalogGyro(0);
 		
 		//Digital port assignments
 		liftSwitch = new DigitalInput(0);

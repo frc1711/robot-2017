@@ -57,6 +57,8 @@ public class DriveSystem extends Subsystem
 		drive = new RobotDrive(leftFrontDrive, leftRearDrive, rightFrontDrive, rightRearDrive);
 		
 		gyro = RobotMap.gyro;
+		
+		drive.setSafetyEnabled(false);
 	}
 	
 	/**
@@ -81,7 +83,7 @@ public class DriveSystem extends Subsystem
 	
 	public void backwardsArcade()
 	{
-		drive.arcadeDrive(RobotMap.driverController.getRawAxis(1), (-1 * RobotMap.driverController.getRawAxis(0)));
+		drive.arcadeDrive(RobotMap.driverController.getRawAxis(1), (RobotMap.driverController.getRawAxis(0)));
 	}
 	
 	/**
@@ -114,8 +116,8 @@ public class DriveSystem extends Subsystem
 	 */
 	public void turnRight(double speed)
 	{
-		leftFrontDrive.set(speed);
-		leftRearDrive.set(speed);
+		leftFrontDrive.set(-speed);
+		leftRearDrive.set(-speed);
 		rightFrontDrive.set(-speed);
 		rightRearDrive.set(-speed);
 	}
@@ -228,6 +230,11 @@ public class DriveSystem extends Subsystem
 	public void zeroEncoder()
 	{
 		driveEncoder = leftRearDrive.getEncPosition();
+	}
+	
+	public double getEncoderRate()
+	{
+		return leftRearDrive.getEncVelocity();
 	}
 
 	@Override

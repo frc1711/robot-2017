@@ -17,6 +17,6 @@ public class MagicNumbers
 	{
 		intakeSpeed = 0.5;
 		liftSpeed = 0.5;
-		agitatorSpeed = -0.5;
+		agitatorSpeed = -0.75;
 	}
 }
