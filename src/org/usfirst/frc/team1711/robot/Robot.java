@@ -16,6 +16,8 @@ import edu.wpi.first.wpilibj.vision.VisionThread;
 import org.usfirst.frc.team1711.robot.commands.LaunchProjectile;
 import org.usfirst.frc.team1711.robot.commands.RawJoystickDrive;
 import org.usfirst.frc.team1711.robot.commands.auton.DoNothing;
+import org.usfirst.frc.team1711.robot.commands.auton.SideGearAndShoot;
+import org.usfirst.frc.team1711.robot.commands.auton.SideGearAuton;
 import org.usfirst.frc.team1711.robot.networking.PiNetworkTable;
 import org.usfirst.frc.team1711.robot.subsystems.Agitator;
 import org.usfirst.frc.team1711.robot.subsystems.DriveSystem;
@@ -90,7 +92,8 @@ public class Robot extends IterativeRobot {
 		chooser.addDefault("Do Nothing", new DoNothing());
 		chooser.addObject("Cross baseline", new DriveDistance(200, 0.25));
 		chooser.addObject("Straight Gear", new DriveDistance(68, 0.25));
-		chooser.addObject("Side gear", new SideGearAuton());
+		chooser.addObject("Boiler side gear", new SideGearAuton(true));
+		chooser.addObject("Other side gear", new SideGearAuton(false));
 		chooser.addObject("Side gear and shoot", new SideGearAndShoot());
 		SmartDashboard.putData("Auto mode", chooser); 
 //		autonomousCommand = new DriveDistance(150, 0.25);

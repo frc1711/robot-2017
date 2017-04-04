@@ -5,6 +5,7 @@ import org.usfirst.frc.team1711.robot.commands.BackwardsIntake;
 import org.usfirst.frc.team1711.robot.commands.JoystickDriveBackwards;
 import org.usfirst.frc.team1711.robot.commands.LaunchProjectile;
 import org.usfirst.frc.team1711.robot.commands.LiftLifter;
+import org.usfirst.frc.team1711.robot.commands.MacroDrive;
 import org.usfirst.frc.team1711.robot.commands.RawJoystickDrive;
 import org.usfirst.frc.team1711.robot.commands.SpinAgitators;
 import org.usfirst.frc.team1711.robot.commands.SpinLeftAgitator;
@@ -52,8 +53,9 @@ public class OI {
 	Button liftButton = new JoystickButton(RobotMap.driverController, 4);
 	Button leftAgitatorButton = new JoystickButton(RobotMap.driverController, 6);
 	Button rightAgitatorButton = new JoystickButton(RobotMap.driverController, 5);
-//	Button goBackwardsButton = new JoystickButton(RobotMap.driverController, 3);
+	Button goBackwardsButton = new JoystickButton(RobotMap.driverController, 3);
 	Button backwardsIntakeButton = new JoystickButton(RobotMap.driverController, 7);
+	Button macroDriveToggle = new JoystickButton(RobotMap.driverController, 8);
 	
 	private boolean isBackwards = false;
 	
@@ -67,15 +69,8 @@ public class OI {
 		intakeButton.whileHeld(new Absorb());
 		backwardsIntakeButton.whileHeld(new BackwardsIntake());
 		
-/*		if(isBackwards)
-		{
-			goBackwardsButton.whenPressed(new RawJoystickDrive());
-			isBackwards = false;
-		}
-		else
-		{
-			goBackwardsButton.whenPressed(new JoystickDriveBackwards());
-			isBackwards = true;
-		} */
+		macroDriveToggle.toggleWhenPressed(new MacroDrive());
+		
+		goBackwardsButton.toggleWhenPressed(new JoystickDriveBackwards());
 	}
 }

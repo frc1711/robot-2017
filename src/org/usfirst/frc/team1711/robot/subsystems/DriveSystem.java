@@ -1,6 +1,7 @@
 package org.usfirst.frc.team1711.robot.subsystems;
 
 import org.usfirst.frc.team1711.robot.RobotMap;
+import org.usfirst.frc.team1711.robot.commands.RawJoystickDrive;
 
 import com.ctre.CANTalon;
 import com.ctre.CANTalon.TalonControlMode;
@@ -84,6 +85,11 @@ public class DriveSystem extends Subsystem
 	public void backwardsArcade()
 	{
 		drive.arcadeDrive(RobotMap.driverController.getRawAxis(1), (RobotMap.driverController.getRawAxis(0)));
+	}
+	
+	public void macroDrive()
+	{
+		drive.arcadeDrive(0.5 * (RobotMap.driverController.getRawAxis(3)), 0.5 * (RobotMap.driverController.getRawAxis(2)));
 	}
 	
 	/**
@@ -239,7 +245,7 @@ public class DriveSystem extends Subsystem
 
 	@Override
 	protected void initDefaultCommand() {
-		// TODO Auto-generated method stub
+		setDefaultCommand(new RawJoystickDrive());
 		
 	}
 	

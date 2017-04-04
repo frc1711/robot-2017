@@ -1,4 +1,7 @@
-package org.usfirst.frc.team1711.robot.commands;
+package org.usfirst.frc.team1711.robot.commands.auton;
+
+import org.usfirst.frc.team1711.robot.commands.TimedAgitate;
+import org.usfirst.frc.team1711.robot.commands.TimedShoot;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
