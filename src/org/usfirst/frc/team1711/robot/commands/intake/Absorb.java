@@ -1,21 +1,23 @@
-package org.usfirst.frc.team1711.robot.commands;
+package org.usfirst.frc.team1711.robot.commands.intake;
 
-import org.usfirst.frc.team1711.robot.MagicNumbers;
 import org.usfirst.frc.team1711.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * This class controls the right agitator
+ * This command controls the intake of fuel into the robot
+ * It is run off of a trigger on a joystick button
  */
-public class SpinRightAgitator extends Command {
+public class Absorb extends Command {
 
 	/**
-	 * Declares the subsystem dependencies of this command
-	 * This command requires the right agitator
+	 * Declares subsystem dependencies for this command
+	 * This command requires the intake subsystem
 	 */
-    public SpinRightAgitator() {
-        requires(Robot.rightAgitator);
+    public Absorb() {
+        // Use requires() here to declare subsystem dependencies
+        // eg. requires(chassis);
+    	requires(Robot.intake);
     }
 
     // Called just before this Command runs the first time
@@ -23,11 +25,11 @@ public class SpinRightAgitator extends Command {
     }
 
     /**
-     * Runs the agitator at a speed set in the constants file
+     * Run the motor controlling the intake at 75% speed
      */
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.rightAgitator.agitate(MagicNumbers.agitatorSpeed);
+    	Robot.intake.absorb(0.75);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -36,19 +38,19 @@ public class SpinRightAgitator extends Command {
     }
 
     /**
-     * Sets the power of the agitator motor to zero
+     * Set the speed on the intake motor to zero
      */
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.rightAgitator.agitate(0);
+    	Robot.intake.absorb(0);
     }
 
     /**
-     * Sets the power of the agitator motor to zero
+     * Set the speed on the intake motor to zero
      */
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	Robot.rightAgitator.agitate(0);
+    	Robot.intake.absorb(0);
     }
 }

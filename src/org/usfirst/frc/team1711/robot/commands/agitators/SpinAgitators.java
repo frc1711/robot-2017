@@ -1,4 +1,4 @@
-package org.usfirst.frc.team1711.robot.commands;
+package org.usfirst.frc.team1711.robot.commands.agitators;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 

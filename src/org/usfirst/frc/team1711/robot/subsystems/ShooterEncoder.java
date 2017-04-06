@@ -39,7 +39,7 @@ public class ShooterEncoder extends Thread {
 	 */
 	public void run()
 	{
-		RobotMap.serialPort.reset();
+/*		RobotMap.serialPort.reset();
 		while(running) {
 			// read from the serial port
 			try 
@@ -89,8 +89,8 @@ public class ShooterEncoder extends Thread {
 			{
 				// port not available, stop thread
 				running=false;
-			}
-		}
+			} 
+		} */
 	}
 
 	public ShooterEncoder()

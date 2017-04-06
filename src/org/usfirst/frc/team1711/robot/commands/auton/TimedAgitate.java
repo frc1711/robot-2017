@@ -1,5 +1,6 @@
 package org.usfirst.frc.team1711.robot.commands.auton;
 
+import org.usfirst.frc.team1711.robot.MagicNumbers;
 import org.usfirst.frc.team1711.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.TimedCommand;
@@ -21,8 +22,8 @@ public class TimedAgitate extends TimedCommand {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.leftAgitator.agitate(Robot.magic.agitatorSpeed);
-    	Robot.rightAgitator.agitate(Robot.magic.agitatorSpeed);
+    	Robot.leftAgitator.agitate(MagicNumbers.agitatorSpeed);
+    	Robot.rightAgitator.agitate(MagicNumbers.agitatorSpeed);
     }
 
     // Called once after timeout

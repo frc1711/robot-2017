@@ -1,36 +1,28 @@
 package org.usfirst.frc.team1711.robot;
 
-import edu.wpi.cscore.CvSink;
-import edu.wpi.cscore.CvSource;
-import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj.vision.VisionThread;
 
-import org.usfirst.frc.team1711.robot.commands.LaunchProjectile;
-import org.usfirst.frc.team1711.robot.commands.RawJoystickDrive;
 import org.usfirst.frc.team1711.robot.commands.auton.DoNothing;
+import org.usfirst.frc.team1711.robot.commands.auton.DriveDistance;
 import org.usfirst.frc.team1711.robot.commands.auton.SideGearAndShoot;
 import org.usfirst.frc.team1711.robot.commands.auton.SideGearAuton;
-import org.usfirst.frc.team1711.robot.networking.PiNetworkTable;
+import org.usfirst.frc.team1711.robot.commands.drive.RawJoystickDrive;
+import org.usfirst.frc.team1711.robot.commands.meta.CurrentMonitor;
+import org.usfirst.frc.team1711.robot.commands.meta.DashboardInput;
+import org.usfirst.frc.team1711.robot.commands.shooters.LaunchProjectile;
 import org.usfirst.frc.team1711.robot.subsystems.Agitator;
 import org.usfirst.frc.team1711.robot.subsystems.DriveSystem;
 import org.usfirst.frc.team1711.robot.subsystems.Intake;
 import org.usfirst.frc.team1711.robot.subsystems.Lift;
 import org.usfirst.frc.team1711.robot.subsystems.Shooter;
-import org.usfirst.frc.team1711.robot.subsystems.ShooterEncoder;
-import org.opencv.core.Mat;
-import org.usfirst.frc.team1711.robot.commands.*;
 
-// serial port test
-import edu.wpi.first.wpilibj.SerialPort;
-import edu.wpi.first.wpilibj.SerialPort.Port;
+import org.usfirst.frc.team1711.robot.commands.*;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -41,18 +33,14 @@ import edu.wpi.first.wpilibj.SerialPort.Port;
  */
 public class Robot extends IterativeRobot {
 
-//	Preferences prefs;
 	public static DriveSystem driveSystem;
 	public static OI oi;	
 	public static Shooter leftShooter;
 	public static Shooter rightShooter;
-//	VisionThread visionThread;
 	public static Agitator leftAgitator;
 	public static Agitator rightAgitator;
 	public static Intake intake;
 	public static Lift lift;
-//	public static PiNetworkTable piNet;
-//	public static ShooterEncoder shooterEncoder;
 	public static MagicNumbers magic;
 	
 	Command autonomousCommand;
@@ -62,9 +50,7 @@ public class Robot extends IterativeRobot {
 	Command currentMonitoring;
 	SendableChooser<Command> chooser = new SendableChooser<>();
 	
-	
-//	boolean cameraCheck = false;
-//	boolean isCamera1 = false;
+	boolean testMode = false;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -76,7 +62,6 @@ public class Robot extends IterativeRobot {
 		driveSystem = new DriveSystem();
 		leftShooter = new Shooter(RobotMap.leftShooterMotor);
 		rightShooter = new Shooter(RobotMap.rightShooterMotor);
-//		shooterEncoder = new ShooterEncoder();
 		lift = new Lift();
 		intake = new Intake();
 		teleopDrive = new RawJoystickDrive();
@@ -84,7 +69,6 @@ public class Robot extends IterativeRobot {
 		rightAgitator = new Agitator(RobotMap.rightAgitatorMotor);
 		launchProjectile = new LaunchProjectile();
 		magic = new MagicNumbers();
-//		piNet = new PiNetworkTable();
 		dashboardInput = new DashboardInput();
 		currentMonitoring = new CurrentMonitor();
 		oi = new OI(); //this line needs to be last
@@ -96,8 +80,7 @@ public class Robot extends IterativeRobot {
 		chooser.addObject("Left side gear", new SideGearAuton(SideGearAuton.LEFT));
 		chooser.addObject("Right side gear and shoot", new SideGearAndShoot(SideGearAuton.RIGHT));
 		chooser.addObject("Left side gear and shoot", new SideGearAndShoot(SideGearAuton.LEFT));
-		SmartDashboard.putData("Auto mode", chooser); 
-//		autonomousCommand = new DriveDistance(150, 0.25);
+		SmartDashboard.putData("Auto mode", chooser);
 
 //		CameraServer.getInstance().startAutomaticCapture("usb cam", "/dev/video1");
 //		CameraServer.getInstance().startAutomaticCapture("usb cam 2", "/dev/video0");
@@ -147,8 +130,11 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
-		System.out.println("Left Encoder: " + driveSystem.getLeftDriveEncoder());
-		System.out.println("Gyro: " + driveSystem.getGyroAngle());
+		if(testMode)
+		{
+			System.out.println("Left Encoder: " + driveSystem.getLeftDriveEncoder());
+			System.out.println("Gyro: " + driveSystem.getGyroAngle());
+		}		
 	}
 
 	@Override
@@ -169,25 +155,12 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-		System.out.println("Gyro: " + driveSystem.getGyroAngle());
-/*		if(RobotMap.driverController.getRawButton(7))
-			isCamera1 = !(isCamera1);
-		
-		if(cameraCheck != isCamera1)
+		if(testMode)
 		{
-			if(isCamera1)
-			{
-				CameraServer.getInstance().startAutomaticCapture("usb cam", "/dev/video0");
-				CameraServer.getInstance()
-			}
-			else
-				CameraServer.getInstance().startAutomaticCapture("usb cam", "/dev/video1");
-			cameraCheck = isCamera1;
-		}
-		else
-			cameraCheck = isCamera1; */
-		System.out.println("Left encoder: " + driveSystem.getLeftDriveEncoder());
-		System.out.println("Right encoder: " + driveSystem.getRightDriveEncoder());
+			System.out.println("Gyro: " + driveSystem.getGyroAngle());
+			System.out.println("Left encoder: " + driveSystem.getLeftDriveEncoder());
+			System.out.println("Right encoder: " + driveSystem.getRightDriveEncoder());
+		}		
 	}
 
 	/**
@@ -195,7 +168,6 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void testPeriodic() {
-		//this is basically our debugger
 		LiveWindow.run();
 	}
 }

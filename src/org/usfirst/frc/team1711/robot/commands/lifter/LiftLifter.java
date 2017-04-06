@@ -1,6 +1,5 @@
-package org.usfirst.frc.team1711.robot.commands;
+package org.usfirst.frc.team1711.robot.commands.lifter;
 
-import org.usfirst.frc.team1711.robot.MagicNumbers;
 import org.usfirst.frc.team1711.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -15,8 +14,6 @@ public class LiftLifter extends Command {
 	 * This command requires the lifter
 	 */
     public LiftLifter() {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
     	requires(Robot.lift);
     }
 
@@ -30,14 +27,11 @@ public class LiftLifter extends Command {
      */
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-//    	if(Robot.lift.getLimitSwitch() == false)
-    		Robot.lift.runLift(0.90);
+    	Robot.lift.runLift(0.90);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-//    	if(Robot.lift.getLimitSwitch())
-//       	return true;
         return false;
     }
 
@@ -46,7 +40,7 @@ public class LiftLifter extends Command {
      */
     // Called once after isFinished returns true
     protected void end() {
-        	Robot.lift.runLift(0);
+        Robot.lift.runLift(0);
     }
 
     /**

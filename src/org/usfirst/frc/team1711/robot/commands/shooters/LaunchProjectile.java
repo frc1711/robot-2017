@@ -1,7 +1,5 @@
-package org.usfirst.frc.team1711.robot.commands;
+package org.usfirst.frc.team1711.robot.commands.shooters;
 
-import org.usfirst.frc.team1711.robot.MagicNumbers;
-import org.usfirst.frc.team1711.robot.OI;
 import org.usfirst.frc.team1711.robot.Robot;
 import org.usfirst.frc.team1711.robot.RobotMap;
 
@@ -46,7 +44,6 @@ public class LaunchProjectile extends Command
 	}
 	@Override
 	protected boolean isFinished() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 	

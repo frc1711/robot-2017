@@ -1,4 +1,4 @@
-package org.usfirst.frc.team1711.robot.commands;
+package org.usfirst.frc.team1711.robot.commands.meta;
 
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc.team1711.robot.Robot;
@@ -54,7 +54,6 @@ public class AutoAim extends Command {
     /**
      * When the target is in the correct position, this will return true and the command will finish
      */
-    // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
         return isDone;
     }

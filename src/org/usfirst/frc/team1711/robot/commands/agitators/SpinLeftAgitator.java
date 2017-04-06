@@ -1,4 +1,4 @@
-package org.usfirst.frc.team1711.robot.commands;
+package org.usfirst.frc.team1711.robot.commands.agitators;
 
 import org.usfirst.frc.team1711.robot.MagicNumbers;
 import org.usfirst.frc.team1711.robot.Robot;
@@ -6,19 +6,16 @@ import org.usfirst.frc.team1711.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * This command controls the intake of fuel into the robot
- * It is run off of a trigger on a joystick button
+ * This class controls the left agitator
  */
-public class Absorb extends Command {
+public class SpinLeftAgitator extends Command {
 
 	/**
-	 * Declares subsystem dependencies for this command
-	 * This command requires the intake subsystem
+	 * Declares the subsystem dependencies of this command
+	 * This command requires the left agitator
 	 */
-    public Absorb() {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
-    	requires(Robot.intake);
+    public SpinLeftAgitator() {
+        requires(Robot.leftAgitator);
     }
 
     // Called just before this Command runs the first time
@@ -26,11 +23,11 @@ public class Absorb extends Command {
     }
 
     /**
-     * Run the motor controlling the intake at 75% speed
+     * Spins the left agitator at the speed set as the constant, universal agitator speed in the constants file
      */
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.intake.absorb(0.75);
+    	Robot.leftAgitator.agitate(MagicNumbers.agitatorSpeed);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -39,19 +36,19 @@ public class Absorb extends Command {
     }
 
     /**
-     * Set the speed on the intake motor to zero
+     * Sets the power of the agitator motor to zero
      */
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.intake.absorb(0);
+    	Robot.leftAgitator.agitate(0);
     }
 
     /**
-     * Set the speed on the intake motor to zero
+     * Sets the power of the agitator motor to zero
      */
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	Robot.intake.absorb(0);
+    	Robot.leftAgitator.agitate(0);
     }
 }

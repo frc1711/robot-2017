@@ -8,10 +8,9 @@ public class MagicNumbers
 	 *  @author Abigail
 	 */
 	public static double intakeSpeed;
-	public static double speedUpTime; //test
+	public static double speedUpTime;
 	public static double liftSpeed;
-	public static double agitatorSpeed; //test
-//	public static final int pulsesPerInchLeft = 588;
+	public static double agitatorSpeed;
 	
 	public MagicNumbers()
 	{

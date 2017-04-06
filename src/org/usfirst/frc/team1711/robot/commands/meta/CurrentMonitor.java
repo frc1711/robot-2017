@@ -1,4 +1,4 @@
-package org.usfirst.frc.team1711.robot.commands;
+package org.usfirst.frc.team1711.robot.commands.meta;
 
 import org.usfirst.frc.team1711.robot.RobotMap;
 
@@ -26,12 +26,10 @@ public class CurrentMonitor extends Command {
         rightCounter = 0;
         leftCounter = 0;
     }
-
-    // Called just before this Command runs the first time
+    
     protected void initialize() {
     }
 
-    // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	leftShooterCurrent = RobotMap.pdp.getCurrent(RobotMap.leftShooterPDP);
     	rightShooterCurrent = RobotMap.pdp.getCurrent(RobotMap.rightShooterPDP);

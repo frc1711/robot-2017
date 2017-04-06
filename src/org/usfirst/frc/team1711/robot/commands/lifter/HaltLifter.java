@@ -1,4 +1,4 @@
-package org.usfirst.frc.team1711.robot.commands;
+package org.usfirst.frc.team1711.robot.commands.lifter;
 
 import org.usfirst.frc.team1711.robot.Robot;
 
@@ -12,8 +12,6 @@ public class HaltLifter extends Command {
     public HaltLifter() 
     {
     	requires(Robot.lift);
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
     }
 
     // Called just before this Command runs the first time

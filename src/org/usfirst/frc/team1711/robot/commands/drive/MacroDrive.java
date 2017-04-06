@@ -1,4 +1,4 @@
-package org.usfirst.frc.team1711.robot.commands;
+package org.usfirst.frc.team1711.robot.commands.drive;
 
 import org.usfirst.frc.team1711.robot.Robot;
 
@@ -7,10 +7,10 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class BackwardsIntake extends Command {
+public class MacroDrive extends Command {
 
-    public BackwardsIntake() {
-        requires(Robot.intake);
+    public MacroDrive() {
+        requires(Robot.driveSystem);
     }
 
     // Called just before this Command runs the first time
@@ -19,7 +19,7 @@ public class BackwardsIntake extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.intake.absorb(-0.75);
+    	Robot.driveSystem.macroDrive();
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -29,12 +29,12 @@ public class BackwardsIntake extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.intake.absorb(0);
+    	Robot.driveSystem.stopMotors();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	Robot.intake.absorb(0);
+    	Robot.driveSystem.stopMotors();
     }
 }

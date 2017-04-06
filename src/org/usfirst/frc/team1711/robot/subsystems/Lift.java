@@ -17,17 +17,13 @@ public class Lift extends Subsystem {
 	
 	public Lift()
 	{
-		liftMotor = RobotMap.liftMotor; 
-		liftSwitch = RobotMap.liftSwitch;
+		liftMotor = RobotMap.liftMotor;
 	}
 	
 	public boolean getLimitSwitch()
-		{
+	{
 		return liftSwitch.get();
-		}
-	
-    // Put methods for controlling this subsystem
-    // here. Call these from Commands.
+	}
 	
 	public void runLift(double speed)
 	{
@@ -40,8 +36,6 @@ public class Lift extends Subsystem {
 	}
 	
     public void initDefaultCommand() {
-        // Set the default command for a subsystem here.
-        //setDefaultCommand(new MySpecialCommand());
     }
 }
 

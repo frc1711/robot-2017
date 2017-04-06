@@ -1,4 +1,4 @@
-package org.usfirst.frc.team1711.robot.commands;
+package org.usfirst.frc.team1711.robot.commands.agitators;
 
 import org.usfirst.frc.team1711.robot.Robot;
 
@@ -7,13 +7,13 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class HaltShooter extends Command {
+public class HaltAgitator extends Command {
 
-    public HaltShooter() {
+    public HaltAgitator() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.leftShooter);
-    	requires(Robot.rightShooter);
+    	requires(Robot.leftAgitator);
+    	requires(Robot.rightAgitator);
     }
 
     // Called just before this Command runs the first time
@@ -21,9 +21,10 @@ public class HaltShooter extends Command {
     }
 
     // Called repeatedly when this Command is scheduled to run
-    protected void execute() {
-    	Robot.leftShooter.stopShooter();
-    	Robot.rightShooter.stopShooter();
+    protected void execute()
+    {
+    	Robot.leftAgitator.stopAgitator();
+    	Robot.rightAgitator.stopAgitator();
     }
 
     // Make this return true when this Command no longer needs to run execute()

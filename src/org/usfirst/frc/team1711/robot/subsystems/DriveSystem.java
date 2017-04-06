@@ -1,13 +1,12 @@
 package org.usfirst.frc.team1711.robot.subsystems;
 
 import org.usfirst.frc.team1711.robot.RobotMap;
-import org.usfirst.frc.team1711.robot.commands.RawJoystickDrive;
+import org.usfirst.frc.team1711.robot.commands.drive.RawJoystickDrive;
 
 import com.ctre.CANTalon;
 import com.ctre.CANTalon.TalonControlMode;
 
 import edu.wpi.first.wpilibj.AnalogGyro;
-import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -33,7 +32,7 @@ public class DriveSystem extends Subsystem
 	AnalogGyro gyro;
 	
 	//gero is the gyro zero
-	//thanks jack for the weird coding terms
+	//thanks sam for the weird coding terms
 	private double gero;
 	
 	boolean inSetPointMode = false;
@@ -201,9 +200,6 @@ public class DriveSystem extends Subsystem
 		leftFrontDrive.changeControlMode(TalonControlMode.Follower);
 		rightFrontDrive.changeControlMode(TalonControlMode.Follower);
 		rightRearDrive.changeControlMode(TalonControlMode.Follower);
-		
-//		leftRearDrive.reverseOutput(true);
-//		leftFrontDrive.reverseOutput(true);
 		
 		leftRearDrive.set(0);
 		leftFrontDrive.set(6);
