@@ -1,4 +1,4 @@
-package org.usfirst.frc.team1711.robot.commands;
+package org.usfirst.frc.team1711.robot.commands.auton;
 
 import org.usfirst.frc.team1711.robot.Robot;
 
@@ -7,12 +7,12 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class TurnRight extends Command {
+public class TurnLeft extends Command {
 
-	double desiredAngle;
-	double myAngle;
+	private double myAngle;
+	private double desiredAngle;
 	
-    public TurnRight(double desiredAngle) {
+    public TurnLeft(double desiredAngle) {
         requires(Robot.driveSystem);
         this.desiredAngle = desiredAngle;
     }
@@ -24,13 +24,14 @@ public class TurnRight extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.driveSystem.turnRight(0.5);
+    	Robot.driveSystem.turnLeft(0.5);
     	myAngle = Robot.driveSystem.getGyroAngle();
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	if(myAngle >= desiredAngle)
+    	//needs to be tested!!!!!!!
+    	if(myAngle <= desiredAngle)
         	return true;
         else
         {

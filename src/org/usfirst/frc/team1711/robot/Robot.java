@@ -92,9 +92,10 @@ public class Robot extends IterativeRobot {
 		chooser.addDefault("Do Nothing", new DoNothing());
 		chooser.addObject("Cross baseline", new DriveDistance(200, 0.25));
 		chooser.addObject("Straight Gear", new DriveDistance(68, 0.25));
-		chooser.addObject("Boiler side gear", new SideGearAuton(true));
-		chooser.addObject("Other side gear", new SideGearAuton(false));
-		chooser.addObject("Side gear and shoot", new SideGearAndShoot());
+		chooser.addObject("Right side gear", new SideGearAuton(SideGearAuton.RIGHT));
+		chooser.addObject("Left side gear", new SideGearAuton(SideGearAuton.LEFT));
+		chooser.addObject("Right side gear and shoot", new SideGearAndShoot(SideGearAuton.RIGHT));
+		chooser.addObject("Left side gear and shoot", new SideGearAndShoot(SideGearAuton.LEFT));
 		SmartDashboard.putData("Auto mode", chooser); 
 //		autonomousCommand = new DriveDistance(150, 0.25);
 

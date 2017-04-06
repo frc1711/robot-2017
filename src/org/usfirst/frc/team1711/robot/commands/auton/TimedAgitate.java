@@ -1,4 +1,4 @@
-package org.usfirst.frc.team1711.robot.commands;
+package org.usfirst.frc.team1711.robot.commands.auton;
 
 import org.usfirst.frc.team1711.robot.Robot;
 
@@ -7,12 +7,12 @@ import edu.wpi.first.wpilibj.command.TimedCommand;
 /**
  *
  */
-public class TimedShoot extends TimedCommand {
+public class TimedAgitate extends TimedCommand {
 
-    public TimedShoot(double timeout) {
+    public TimedAgitate(double timeout) {
         super(timeout);
-        requires(Robot.leftShooter);
-        requires(Robot.rightShooter);
+        requires(Robot.leftAgitator);
+        requires(Robot.rightAgitator);
     }
 
     // Called just before this Command runs the first time
@@ -21,20 +21,20 @@ public class TimedShoot extends TimedCommand {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.leftShooter.shoot(1.0);
-    	Robot.rightShooter.shoot(1.0);
+    	Robot.leftAgitator.agitate(Robot.magic.agitatorSpeed);
+    	Robot.rightAgitator.agitate(Robot.magic.agitatorSpeed);
     }
 
     // Called once after timeout
     protected void end() {
-    	Robot.leftShooter.shoot(0);
-    	Robot.rightShooter.shoot(0);
+    	Robot.leftAgitator.agitate(0);
+    	Robot.rightAgitator.agitate(0);
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	Robot.leftShooter.shoot(0);
-    	Robot.rightShooter.shoot(0);
+    	Robot.leftAgitator.agitate(0);
+    	Robot.rightAgitator.agitate(0);
     }
 }
