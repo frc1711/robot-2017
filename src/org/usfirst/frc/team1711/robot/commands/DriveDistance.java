@@ -1,5 +1,6 @@
 package org.usfirst.frc.team1711.robot.commands;
 
+import org.usfirst.frc.team1711.robot.MagicNumbers;
 import org.usfirst.frc.team1711.robot.Robot;
 import org.usfirst.frc.team1711.robot.RobotMap;
 
@@ -23,7 +24,7 @@ public class DriveDistance extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-//    	Robot.driveSystem.zeroEncoder();
+    	Robot.driveSystem.zeroEncoders();
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -34,7 +35,7 @@ public class DriveDistance extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        if((Robot.driveSystem.getDriveEncoder() * RobotMap.distancePerPulse) >= distance)
+        if((Robot.driveSystem.getLeftDriveEncoder() / RobotMap.pulsesPerInchLeft) >= distance)
         	return true;
         else
         	return false;

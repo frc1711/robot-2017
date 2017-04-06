@@ -48,7 +48,8 @@ public class RobotMap {
 	public static PowerDistributionPanel pdp;
 	
 	//Constants
-	public static final double distancePerPulse = 0.01910;
+	public static final double pulsesPerInchLeft = 224.5;
+	public static final double pulsesPerInchRight = 247.5;
 	
 	//e-stop
 	public static boolean rightShooterSad;
@@ -87,7 +88,7 @@ public class RobotMap {
 		rightShooterPDP = 14;
 		
 		// Serial port assignments
-		serialPort=new SerialPort(57600,Port.kMXP);		// shooter encoder board (Arduino)
+//		serialPort=new SerialPort(57600,Port.kMXP);		// shooter encoder board (Arduino)
 		
 		rightShooterSad = false;
 		leftShooterSad = false;

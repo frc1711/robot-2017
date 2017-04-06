@@ -12,7 +12,7 @@ public class GearAuton extends CommandGroup {
 
     public GearAuton() {
         addSequential(new DriveDistance(60, 0.50));
-        Robot.driveSystem.zeroEncoder();
+        Robot.driveSystem.zeroEncoders();
         addSequential(new DriveDistance(20, 0.25));
     }
 }

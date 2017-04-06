@@ -135,7 +135,7 @@ public class Robot extends IterativeRobot {
 		autonomousCommand = chooser.getSelected();
 
 	//	driveSystem.resetGyro();
-		driveSystem.zeroEncoder();
+		driveSystem.zeroEncoders();
 		if (autonomousCommand != null)
 			autonomousCommand.start();
 	}
@@ -146,7 +146,8 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
-//		System.out.println(driveSystem.getGyroAngle());
+		System.out.println("Left Encoder: " + driveSystem.getLeftDriveEncoder());
+		System.out.println("Gyro: " + driveSystem.getGyroAngle());
 	}
 
 	@Override
@@ -158,6 +159,7 @@ public class Robot extends IterativeRobot {
 		launchProjectile.start();
 		dashboardInput.start();
 		currentMonitoring.start();
+		driveSystem.zeroEncoders();
 	}
 
 	/**
@@ -166,7 +168,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-//		System.out.println(driveSystem.getGyroAngle());
+		System.out.println("Gyro: " + driveSystem.getGyroAngle());
 /*		if(RobotMap.driverController.getRawButton(7))
 			isCamera1 = !(isCamera1);
 		
@@ -183,6 +185,8 @@ public class Robot extends IterativeRobot {
 		}
 		else
 			cameraCheck = isCamera1; */
+		System.out.println("Left encoder: " + driveSystem.getLeftDriveEncoder());
+		System.out.println("Right encoder: " + driveSystem.getRightDriveEncoder());
 	}
 
 	/**

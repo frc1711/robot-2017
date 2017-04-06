@@ -25,7 +25,8 @@ public class DriveSystem extends Subsystem
 	CANTalon leftRearDrive;
 	CANTalon rightRearDrive;
 	
-	private double driveEncoder = 0;
+	private double driveLeftEncoder = 0;
+	private double driveRightEncoder = 0;
 	
 	RobotDrive drive;
 	
@@ -52,8 +53,8 @@ public class DriveSystem extends Subsystem
 		rightRearDrive = RobotMap.rearRightDriveCANTalon;
 		rightRearDrive.setInverted(true);
 		
-		//figure out which talons these are actually plugged into, should be one on each side
 		leftRearDrive.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
+		rightRearDrive.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
 		
 		drive = new RobotDrive(leftFrontDrive, leftRearDrive, rightFrontDrive, rightRearDrive);
 		
@@ -84,12 +85,12 @@ public class DriveSystem extends Subsystem
 	
 	public void backwardsArcade()
 	{
-		drive.arcadeDrive(RobotMap.driverController.getRawAxis(1), (RobotMap.driverController.getRawAxis(0)));
+		drive.arcadeDrive(-1 *(RobotMap.driverController.getRawAxis(1)), -1 * (RobotMap.driverController.getRawAxis(0)));
 	}
 	
 	public void macroDrive()
 	{
-		drive.arcadeDrive(0.5 * (RobotMap.driverController.getRawAxis(3)), 0.5 * (RobotMap.driverController.getRawAxis(2)));
+		drive.arcadeDrive(0.5 * (RobotMap.driverController.getRawAxis(1)), 0.5 * (RobotMap.driverController.getRawAxis(0)));
 	}
 	
 	/**
@@ -168,14 +169,30 @@ public class DriveSystem extends Subsystem
 	 * Gets the current position of the drive encoder
 	 * @return The current position of the drive encoder
 	 */
-	public double getDriveEncoder()
+	public double getLeftDriveEncoder()
 	{
-		return (leftRearDrive.getEncPosition() - driveEncoder);
+		return (-1 * (leftRearDrive.getEncPosition()) + driveLeftEncoder);
 	}
 	
-	public double getAbsoluteEncoder()
+	public double getRightDriveEncoder()
 	{
-		return leftRearDrive.getEncPosition();
+		return (rightRearDrive.getEncPosition() - driveRightEncoder);
+	}
+	
+	public double getAbsoluteLeftEncoder()
+	{
+		return (-1 * (leftRearDrive.getEncPosition()));
+	}
+	
+	public double getAbsoluteRightEncoder()
+	{
+		return rightRearDrive.getEncPosition();
+	}
+	
+	public double getEncoders()
+	{
+		double average = (getRightDriveEncoder() + getLeftDriveEncoder()) / 2;
+		return average;
 	}
 	
 	public void enablePositionMode()
@@ -216,7 +233,7 @@ public class DriveSystem extends Subsystem
 	
 	public void setSetpoint(double setPoint)
 	{
-		this.setPoint = setPoint / RobotMap.distancePerPulse;
+		//this.setPoint = setPoint / RobotMap.distancePerPulse;
 	}
 	
 	public void goToSetpoint()
@@ -225,17 +242,18 @@ public class DriveSystem extends Subsystem
 			leftRearDrive.set(this.setPoint);
 	}
 	
-	public boolean isAtSetPoint()
+/*	public boolean isAtSetPoint()
 	{
 		if(getDriveEncoder() >= setPoint)
 			return true;
 		else
 			return false;
-	}
+	} */
 	
-	public void zeroEncoder()
+	public void zeroEncoders()
 	{
-		driveEncoder = leftRearDrive.getEncPosition();
+		driveLeftEncoder = leftRearDrive.getEncPosition();
+		driveRightEncoder = rightRearDrive.getEncPosition();
 	}
 	
 	public double getEncoderRate()

@@ -11,7 +11,7 @@ public class MagicNumbers
 	public static double speedUpTime; //test
 	public static double liftSpeed;
 	public static double agitatorSpeed; //test
-	public static double distancePerPulse; //test
+//	public static final int pulsesPerInchLeft = 588;
 	
 	public MagicNumbers()
 	{
