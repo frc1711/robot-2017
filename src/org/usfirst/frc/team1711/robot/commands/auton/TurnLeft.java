@@ -14,7 +14,7 @@ public class TurnLeft extends Command {
 	
     public TurnLeft(double desiredAngle) {
         requires(Robot.driveSystem);
-        this.desiredAngle = desiredAngle;
+        this.desiredAngle = -1 * desiredAngle;
     }
 
     // Called just before this Command runs the first time

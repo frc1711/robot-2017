@@ -17,7 +17,7 @@ public class TurnNoGyro extends Command
 		this.angle = angle;
 		
 		//test to find this
-		pulsesPerDegree = 0;
+		pulsesPerDegree = 69.49;
 		
 		if(direction.equals("RIGHT"))
 		{

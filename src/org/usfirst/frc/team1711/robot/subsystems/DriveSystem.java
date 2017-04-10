@@ -84,7 +84,7 @@ public class DriveSystem extends Subsystem
 	
 	public void backwardsArcade()
 	{
-		drive.arcadeDrive(-1 *(RobotMap.driverController.getRawAxis(1)), -1 * (RobotMap.driverController.getRawAxis(0)));
+		drive.arcadeDrive(-1 *(RobotMap.driverController.getRawAxis(1)), (RobotMap.driverController.getRawAxis(0)));
 	}
 	
 	public void macroDrive()

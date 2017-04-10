@@ -30,7 +30,6 @@ public class OI {
 	Button backwardsIntakeButton = new JoystickButton(RobotMap.driverController, 7);
 	Button macroDriveToggle = new JoystickButton(RobotMap.driverController, 8);
 	
-	
 	public OI()
 	{
 		doubleAgitatorButton.whileHeld(new SpinAgitators());

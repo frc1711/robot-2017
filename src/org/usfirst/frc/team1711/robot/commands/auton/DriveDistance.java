@@ -32,7 +32,7 @@ public class DriveDistance extends Command {
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
 //        if((Robot.driveSystem.getLeftDriveEncoder() / RobotMap.pulsesPerInchLeft) >= distance)
-    	if((Robot.driveSystem.getEncoders() / (RobotMap.pulsesPerInchLeft + RobotMap.pulsesPerInchRight) / 2) >= distance)
+    	if((Robot.driveSystem.getLeftDriveEncoder() / RobotMap.pulsesPerInchLeft >= distance))
         	return true;
         else
         	return false;

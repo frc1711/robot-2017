@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team1711.robot.commands.auton.DoNothing;
 import org.usfirst.frc.team1711.robot.commands.auton.DriveDistance;
+import org.usfirst.frc.team1711.robot.commands.auton.ShootAuton;
 import org.usfirst.frc.team1711.robot.commands.auton.SideGearAndShoot;
 import org.usfirst.frc.team1711.robot.commands.auton.SideGearAuton;
 import org.usfirst.frc.team1711.robot.commands.drive.RawJoystickDrive;
@@ -48,7 +49,8 @@ public class Robot extends IterativeRobot {
 	Command launchProjectile;
 	Command dashboardInput;
 	Command currentMonitoring;
-	SendableChooser<Command> chooser = new SendableChooser<>();
+	SendableChooser<Command> chooser; // = new SendableChooser<>();
+//	SendableChooser<Command> autoChooser = new SendableChooser<>();
 	
 	boolean testMode = false;
 
@@ -71,6 +73,7 @@ public class Robot extends IterativeRobot {
 		magic = new MagicNumbers();
 		dashboardInput = new DashboardInput();
 		currentMonitoring = new CurrentMonitor();
+		chooser = new SendableChooser<>();
 		oi = new OI(); //this line needs to be last
 			
 		chooser.addDefault("Do Nothing", new DoNothing());
@@ -80,7 +83,21 @@ public class Robot extends IterativeRobot {
 		chooser.addObject("Left side gear", new SideGearAuton(SideGearAuton.LEFT));
 		chooser.addObject("Right side gear and shoot", new SideGearAndShoot(SideGearAuton.RIGHT));
 		chooser.addObject("Left side gear and shoot", new SideGearAndShoot(SideGearAuton.LEFT));
-		SmartDashboard.putData("Auto mode", chooser);
+		chooser.addObject("Right shoot auton", new ShootAuton(SideGearAuton.RIGHT));
+		chooser.addObject("Left shoot auton", new ShootAuton(SideGearAuton.LEFT));
+		SmartDashboard.putData("Auto mode", chooser); 
+		
+/*		autoChooser.addObject("hi", new DoNothing());
+		autoChooser.addDefault("Do Nothing", new DoNothing());
+		autoChooser.addObject("Cross baseline", new DriveDistance(200, 0.25));
+		autoChooser.addObject("Straight Gear", new DriveDistance(68, 0.25));
+		autoChooser.addObject("Right side gear", new SideGearAuton(SideGearAuton.RIGHT));
+		autoChooser.addObject("Left side gear", new SideGearAuton(SideGearAuton.LEFT));
+		autoChooser.addObject("Right side gear and shoot", new SideGearAndShoot(SideGearAuton.RIGHT));
+		autoChooser.addObject("Left side gear and shoot", new SideGearAndShoot(SideGearAuton.LEFT));
+		autoChooser.addObject("Right shoot auton", new ShootAuton(SideGearAuton.RIGHT));
+		autoChooser.addObject("Left shoot auton", new ShootAuton(SideGearAuton.LEFT));
+		SmartDashboard.putData("Auto chooser", autoChooser); */
 
 //		CameraServer.getInstance().startAutomaticCapture("usb cam", "/dev/video1");
 //		CameraServer.getInstance().startAutomaticCapture("usb cam 2", "/dev/video0");
