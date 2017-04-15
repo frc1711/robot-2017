@@ -34,4 +34,9 @@ public class PiNetworkTable
 		double distance = table.getNumber("distance from target", 0);
 		return distance;
 	}
+	
+	public void setCamera(int chosenCamera)
+	{
+		table.putNumber("Camera", chosenCamera);
+	}
 }

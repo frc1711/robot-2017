@@ -24,7 +24,7 @@ public class TurnRight extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.driveSystem.turnRight(0.5);
+    	Robot.driveSystem.turnRight(0.3);
     	myAngle = Robot.driveSystem.getGyroAngle();
     }
 

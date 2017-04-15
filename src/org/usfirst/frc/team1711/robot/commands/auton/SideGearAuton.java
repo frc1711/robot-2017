@@ -12,16 +12,16 @@ public class SideGearAuton extends CommandGroup {
 	
     public SideGearAuton(int side) 
     {	
-    	addSequential(new DriveDistance(125.0, 0.25)); //121 inches
+    	addSequential(new DriveDistanceGyro(67.0, 0.25)); //121 inches
     	
     	if(side == 1)
 //    		addSequential(new TurnNoGyro(0.5, 50.0, "LEFT"));
-    		addSequential(new TurnRight(76.0));
+    		addSequential(new TurnRight(45.0));
     	else if(side == 0)
 //    		addSequential(new TurnNoGyro(0.5, 50.0, "RIGHT"));
-    		addSequential(new TurnLeft(76.0));
+    		addSequential(new TurnLeft(50.0));
     	
     	//find this in inches and use encoders
-    	addSequential(new DriveDistance(114.5, 0.25));
+    	addSequential(new DriveDistance(100.0, 0.25));
     }
 }

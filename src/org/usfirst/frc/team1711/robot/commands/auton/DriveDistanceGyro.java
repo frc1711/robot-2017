@@ -1,53 +1,55 @@
 package org.usfirst.frc.team1711.robot.commands.auton;
 
 import org.usfirst.frc.team1711.robot.Robot;
+import org.usfirst.frc.team1711.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class TurnLeft extends Command {
+public class DriveDistanceGyro extends Command {
 
-	private double myAngle;
-	private double desiredAngle;
+	double speed;
+	double distance;
 	
-    public TurnLeft(double desiredAngle) {
+    public DriveDistanceGyro(double distance, double speed) 
+    {
         requires(Robot.driveSystem);
-        this.desiredAngle = -1 * desiredAngle;
+        this.speed = -speed;
+        this.distance = distance;
     }
 
     // Called just before this Command runs the first time
-    protected void initialize() {
+    protected void initialize() 
+    {
     	Robot.driveSystem.resetGyro();
+    	Robot.driveSystem.zeroEncoders();
     }
 
     // Called repeatedly when this Command is scheduled to run
-    protected void execute() {
-    	Robot.driveSystem.turnLeft(0.3);
-    	myAngle = Robot.driveSystem.getGyroAngle();
+    protected void execute() 
+    {
+    	double currentHeading = Robot.driveSystem.getGyroAngle();
+    	double correction = -1 * (currentHeading / 100);
+    	Robot.driveSystem.drive.drive(speed, correction);
     }
 
     // Make this return true when this Command no longer needs to run execute()
-    protected boolean isFinished() {
-    	//needs to be tested!!!!!!!
-    	if(myAngle <= desiredAngle)
+    protected boolean isFinished() 
+    {
+    	if((Robot.driveSystem.getLeftDriveEncoder() / RobotMap.pulsesPerInchLeft >= distance))
         	return true;
         else
-        {
-        	System.out.println(Robot.driveSystem.getGyroAngle());
         	return false;
-        }
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.driveSystem.stopMotors();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	Robot.driveSystem.stopMotors();
     }
 }

@@ -27,7 +27,9 @@ public class DriveSystem extends Subsystem
 	private double driveLeftEncoder = 0;
 	private double driveRightEncoder = 0;
 	
-	RobotDrive drive;
+	static final double BIAS_CORRECTION = 1;
+	
+	public RobotDrive drive;
 	
 	AnalogGyro gyro;
 	
@@ -98,8 +100,8 @@ public class DriveSystem extends Subsystem
 	 */
 	public void driveForward(double speed)
 	{
-		leftFrontDrive.set(-speed);
-		leftRearDrive.set(-speed);
+		leftFrontDrive.set(-speed *(BIAS_CORRECTION));
+		leftRearDrive.set(-speed * (BIAS_CORRECTION));
 		rightFrontDrive.set(speed);
 		rightRearDrive.set(speed);
 	}
@@ -110,8 +112,8 @@ public class DriveSystem extends Subsystem
 	 */
 	public void turnLeft(double speed)
 	{
-		leftFrontDrive.set(speed);
-		leftRearDrive.set(speed);
+		leftFrontDrive.set(speed * (BIAS_CORRECTION));
+		leftRearDrive.set(speed * (BIAS_CORRECTION));
 		rightFrontDrive.set(speed);
 		rightRearDrive.set(speed);
 	}
@@ -122,8 +124,8 @@ public class DriveSystem extends Subsystem
 	 */
 	public void turnRight(double speed)
 	{
-		leftFrontDrive.set(-speed);
-		leftRearDrive.set(-speed);
+		leftFrontDrive.set(-speed * (BIAS_CORRECTION));
+		leftRearDrive.set(-speed * (BIAS_CORRECTION));
 		rightFrontDrive.set(-speed);
 		rightRearDrive.set(-speed);
 	}
@@ -199,12 +201,12 @@ public class DriveSystem extends Subsystem
 		leftRearDrive.changeControlMode(TalonControlMode.Position);
 		leftFrontDrive.changeControlMode(TalonControlMode.Follower);
 		rightFrontDrive.changeControlMode(TalonControlMode.Follower);
-		rightRearDrive.changeControlMode(TalonControlMode.Follower);
+		rightRearDrive.changeControlMode(TalonControlMode.Position);
 		
 		leftRearDrive.set(0);
 		leftFrontDrive.set(6);
 		rightFrontDrive.set(6);
-		rightRearDrive.set(6);
+		rightRearDrive.set(0);
 		
 		inSetPointMode = true;
 	}

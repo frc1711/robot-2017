@@ -1,5 +1,9 @@
 package org.usfirst.frc.team1711.robot;
 
+import edu.wpi.cscore.CvSink;
+import edu.wpi.cscore.CvSource;
+import edu.wpi.cscore.MjpegServer;
+import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -10,6 +14,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team1711.robot.commands.auton.DoNothing;
 import org.usfirst.frc.team1711.robot.commands.auton.DriveDistance;
+import org.usfirst.frc.team1711.robot.commands.auton.DriveDistanceGyro;
 import org.usfirst.frc.team1711.robot.commands.auton.ShootAuton;
 import org.usfirst.frc.team1711.robot.commands.auton.SideGearAndShoot;
 import org.usfirst.frc.team1711.robot.commands.auton.SideGearAuton;
@@ -17,12 +22,13 @@ import org.usfirst.frc.team1711.robot.commands.drive.RawJoystickDrive;
 import org.usfirst.frc.team1711.robot.commands.meta.CurrentMonitor;
 import org.usfirst.frc.team1711.robot.commands.meta.DashboardInput;
 import org.usfirst.frc.team1711.robot.commands.shooters.LaunchProjectile;
+import org.usfirst.frc.team1711.robot.networking.PiNetworkTable;
 import org.usfirst.frc.team1711.robot.subsystems.Agitator;
 import org.usfirst.frc.team1711.robot.subsystems.DriveSystem;
 import org.usfirst.frc.team1711.robot.subsystems.Intake;
 import org.usfirst.frc.team1711.robot.subsystems.Lift;
 import org.usfirst.frc.team1711.robot.subsystems.Shooter;
-
+import org.opencv.core.Mat;
 import org.usfirst.frc.team1711.robot.commands.*;
 
 /**
@@ -43,16 +49,19 @@ public class Robot extends IterativeRobot {
 	public static Intake intake;
 	public static Lift lift;
 	public static MagicNumbers magic;
+	public static PiNetworkTable piNet;
 	
 	Command autonomousCommand;
 	Command teleopDrive;
 	Command launchProjectile;
 	Command dashboardInput;
 	Command currentMonitoring;
-	SendableChooser<Command> chooser; // = new SendableChooser<>();
-//	SendableChooser<Command> autoChooser = new SendableChooser<>();
+	SendableChooser<Command> chooser;
+	SendableChooser<Integer> cameraChooser;
 	
-	boolean testMode = false;
+	int cameraChosen;
+	
+	boolean testMode = true;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -74,34 +83,43 @@ public class Robot extends IterativeRobot {
 		dashboardInput = new DashboardInput();
 		currentMonitoring = new CurrentMonitor();
 		chooser = new SendableChooser<>();
+		cameraChooser = new SendableChooser<>();
+		piNet = new PiNetworkTable();
 		oi = new OI(); //this line needs to be last
 			
 		chooser.addDefault("Do Nothing", new DoNothing());
 		chooser.addObject("Cross baseline", new DriveDistance(200, 0.25));
-		chooser.addObject("Straight Gear", new DriveDistance(68, 0.25));
+		chooser.addObject("Straight Gear", new DriveDistance(100.0, 0.25));
 		chooser.addObject("Right side gear", new SideGearAuton(SideGearAuton.RIGHT));
 		chooser.addObject("Left side gear", new SideGearAuton(SideGearAuton.LEFT));
 		chooser.addObject("Right side gear and shoot", new SideGearAndShoot(SideGearAuton.RIGHT));
 		chooser.addObject("Left side gear and shoot", new SideGearAndShoot(SideGearAuton.LEFT));
 		chooser.addObject("Right shoot auton", new ShootAuton(SideGearAuton.RIGHT));
 		chooser.addObject("Left shoot auton", new ShootAuton(SideGearAuton.LEFT));
+		chooser.addObject("Gyro corrected", new DriveDistanceGyro(90.0, 0.3));
 		SmartDashboard.putData("Auto mode", chooser); 
 		
-/*		autoChooser.addObject("hi", new DoNothing());
-		autoChooser.addDefault("Do Nothing", new DoNothing());
-		autoChooser.addObject("Cross baseline", new DriveDistance(200, 0.25));
-		autoChooser.addObject("Straight Gear", new DriveDistance(68, 0.25));
-		autoChooser.addObject("Right side gear", new SideGearAuton(SideGearAuton.RIGHT));
-		autoChooser.addObject("Left side gear", new SideGearAuton(SideGearAuton.LEFT));
-		autoChooser.addObject("Right side gear and shoot", new SideGearAndShoot(SideGearAuton.RIGHT));
-		autoChooser.addObject("Left side gear and shoot", new SideGearAndShoot(SideGearAuton.LEFT));
-		autoChooser.addObject("Right shoot auton", new ShootAuton(SideGearAuton.RIGHT));
-		autoChooser.addObject("Left shoot auton", new ShootAuton(SideGearAuton.LEFT));
-		SmartDashboard.putData("Auto chooser", autoChooser); */
-
-//		CameraServer.getInstance().startAutomaticCapture("usb cam", "/dev/video1");
-//		CameraServer.getInstance().startAutomaticCapture("usb cam 2", "/dev/video0");
-		CameraServer.getInstance().startAutomaticCapture();
+		cameraChooser.addDefault("Axis camera", 0);
+		cameraChooser.addObject("USB Camera", 1);
+		SmartDashboard.putData("Camera chooser", cameraChooser);
+		
+		new Thread(() ->
+				{
+					UsbCamera cam0 = CameraServer.getInstance().startAutomaticCapture();
+					cam0.setExposureManual(40);
+					cam0.setResolution(640, 480);
+					CvSink cvsink = CameraServer.getInstance().getVideo();
+					CvSource outputStream = CameraServer.getInstance().putVideo("cam0", 640, 480);
+					Mat source = new Mat();
+					
+					while(!Thread.interrupted())
+					{
+						cvsink.grabFrame(source);
+						outputStream.putFrame(source);
+					}
+				}).start();
+//		CameraServer.getInstance().addCamera(cam0);
+	//	CameraServer.getInstance().startAutomaticCapture();
 	}
 
 	/**
@@ -117,6 +135,11 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
+		
+		if(testMode)
+		{
+			System.out.println("Gyro: " + driveSystem.getGyroAngle());
+		}
 	}
 
 	/**
@@ -134,8 +157,9 @@ public class Robot extends IterativeRobot {
 	public void autonomousInit() {
 		
 		autonomousCommand = chooser.getSelected();
-
-	//	driveSystem.resetGyro();
+//		piNet.setCamera(cameraChooser.getSelected());
+		
+		driveSystem.resetGyro();
 		driveSystem.zeroEncoders();
 		if (autonomousCommand != null)
 			autonomousCommand.start();
